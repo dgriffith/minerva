@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Minerva — Docs — Manual Rename, Move &amp; Delete</title>
+<meta name="description" content="Renaming, moving, and deleting notes directly in the Notes tree, and what automatically updates when you do — wiki-links, relative markdown links, and what doesn't." />
+<link rel="stylesheet" href="../minerva.css" />
+<link rel="stylesheet" href="docs.css" />
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="../index.html" class="brand">
+      <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" aria-label="Minerva">
+        <defs>
+          <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1b2452"/><stop offset="45%" stop-color="#232a5e"/><stop offset="100%" stop-color="#3a2d6b"/></linearGradient>
+          <linearGradient id="plum" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e9b96a"/><stop offset="55%" stop-color="#cf9646"/><stop offset="100%" stop-color="#a9742f"/></linearGradient>
+          <linearGradient id="fc" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f6e2b8"/><stop offset="100%" stop-color="#e3c489"/></linearGradient>
+          <radialGradient id="eg" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#fff7e6"/><stop offset="60%" stop-color="#ffd97a"/><stop offset="100%" stop-color="#d99a3a"/></radialGradient>
+        </defs>
+        <rect width="1024" height="1024" rx="220" fill="url(#sky)"/>
+        <path d="M512 880 C 360 880, 300 760, 300 620 C 300 470, 380 380, 512 380 C 644 380, 724 470, 724 620 C 724 760, 664 880, 512 880 Z" fill="url(#plum)"/>
+        <ellipse cx="512" cy="455" rx="232" ry="200" fill="url(#plum)"/>
+        <path d="M512 290 C 408 290, 350 360, 350 460 C 350 560, 420 630, 512 630 C 604 630, 674 560, 674 460 C 674 360, 616 290, 512 290 Z" fill="url(#fc)"/>
+        <circle cx="438" cy="450" r="92" fill="#3a2a18"/><circle cx="586" cy="450" r="92" fill="#3a2a18"/>
+        <circle cx="438" cy="450" r="74" fill="url(#eg)"/><circle cx="586" cy="450" r="74" fill="url(#eg)"/>
+        <circle cx="438" cy="450" r="34" fill="#241608"/><circle cx="586" cy="450" r="34" fill="#241608"/>
+        <circle cx="452" cy="436" r="12" fill="#fffdf5"/><circle cx="600" cy="436" r="12" fill="#fffdf5"/>
+        <path d="M512 470 L490 540 C 490 562, 534 562, 534 540 Z" fill="#caa24a"/>
+      </svg>
+      <span>Minerva</span>
+    </a>
+    <div class="links">
+      <a href="../features.html" class="hide-sm">Features</a>
+      <a href="../getting-started.html" class="hide-sm">Getting Started</a>
+      <a href="index.html" class="active hide-sm">Docs</a>
+      <a href="../about.html" class="hide-sm">About</a>
+      <a href="../getting-started.html" class="navcta">Download</a>
+    </div>
+  </div>
+</nav>
+
+<div class="docs">
+
+  <!-- ===== Left navigation (shared across all docs pages) ===== -->
+  <aside class="docs-nav">
+    <h4>Introduction</h4>
+    <a href="index.html">Overview</a>
+    <a href="../getting-started.html">Getting started</a>
+
+    <h4>Using Minerva</h4>
+    <a href="notes.html">Notes</a>
+    <a href="navigation.html">Navigation</a>
+    <a href="viewing-options.html">Viewing options</a>
+    <a href="editor.html">Editor</a>
+
+    <h4>The workspace</h4>
+    <a href="left-sidebar.html">Left sidebar</a>
+    <a href="right-sidebar.html">Right sidebar</a>
+    <a href="conversations.html">Conversations</a>
+    <a href="thinking-tools.html">Thinking tools</a>
+    <a href="settings.html">Settings</a>
+
+    <h4>Data &amp; workflows</h4>
+    <a href="query.html">Query</a>
+    <a href="ingest.html">Ingest</a>
+    <a href="export.html">Export</a>
+    <a href="maintenance.html">Maintenance</a>
+    <a href="refactoring.html">Refactoring</a>
+    <a href="refactoring-manual.html" class="sub active">Manual rename, move &amp; delete</a>
+    <a href="refactoring-safe-delete.html" class="sub">Safe delete &amp; dangling links</a>
+    <a href="refactoring-ai-assisted.html" class="sub">AI-assisted refactors</a>
+  </aside>
+
+  <!-- ===== Content ===== -->
+  <main class="docs-content">
+    <p class="crumbs"><a href="index.html">Docs</a><span class="sep">/</span><a href="refactoring.html">Refactoring</a><span class="sep">/</span>Manual rename, move &amp; delete</p>
+
+    <h1>Manual rename, move &amp; delete</h1>
+    <p class="lede">Doing it yourself, right in the Notes tree — and what Minerva keeps consistent for you when you do.</p>
+
+    <h2 id="actions">Right-click and drag</h2>
+    <div class="deflist">
+      <div class="row">
+        <div class="k">Rename</div>
+        <div class="v">Right-click a note → Rename. Also reachable from the command palette as <b>Rename Note…</b> (no default keyboard shortcut).</div>
+      </div>
+      <div class="row">
+        <div class="k">Move</div>
+        <div class="v">Drag a note onto a destination folder, or use the command palette's <b>Move Note…</b> (also no default shortcut) to type a destination path instead.</div>
+      </div>
+      <div class="row">
+        <div class="k">Delete</div>
+        <div class="v">Right-click → Delete. See <a href="refactoring-safe-delete.html">Safe delete &amp; dangling links</a> for what happens before it actually deletes anything.</div>
+      </div>
+      <div class="row">
+        <div class="k">Cut / Copy / Paste</div>
+        <div class="v">Standard clipboard operations are also available from the right-click menu, as another way to move or duplicate notes between folders.</div>
+      </div>
+    </div>
+
+    <div class="shot wide">
+      <div class="icon">✏️</div>
+      <div class="k">Screenshot — Right-click menu on a note</div>
+      <div class="d">The Notes tree with a note right-clicked, showing the context menu: Rename, Delete, Cut, Copy, Paste, Merge into…, and the rest of the per-note actions.</div>
+    </div>
+
+    <h2 id="auto-update">What auto-updates</h2>
+    <p>Rename or move a note, and Minerva rewrites references to it across the rest of the thoughtbase:</p>
+    <div class="deflist">
+      <div class="row">
+        <div class="k">Wiki-links</div>
+        <div class="v"><code>[[old]]</code> becomes <code>[[new]]</code> everywhere it's referenced — preserving a type prefix (<code>[[type::old]]</code> → <code>[[type::new]]</code>), display text (<code>[[old|label]]</code> → <code>[[new|label]]</code>), and an anchor (<code>[[old#heading]]</code> → <code>[[new#heading]]</code>).</div>
+      </div>
+      <div class="row">
+        <div class="k">Relative markdown links &amp; images</div>
+        <div class="v">A plain <code>[text](path)</code> or <code>![alt](pic.png)</code> gets re-relativized both from the moved note's new location, and from any other note that links to it — so a relative path stays correct on both ends of the link.</div>
+      </div>
+    </div>
+    <p>What does <b>not</b> update: source and excerpt citation markers (<code>[[cite::id]]</code>, <code>[[quote::id]]</code>) — those target a stable id, not a path, so they're unaffected by a note moving in the first place.</p>
+
+    <div class="box">
+      <span class="label">Folder renames work, but differently</span>
+      <p>Renaming a whole folder works via drag-and-drop, the same as moving one — there's just no dedicated prompt-driven shortcut for it the way single-note rename has one.</p>
+    </div>
+
+    <div class="pager">
+      <a class="prev" href="refactoring.html">
+        <span class="dir">Previous</span>
+        <span class="ttl">← Refactoring</span>
+      </a>
+      <a class="next" href="refactoring-safe-delete.html">
+        <span class="dir">Next</span>
+        <span class="ttl">Safe delete &amp; dangling links →</span>
+      </a>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div class="brand" style="display:flex;align-items:center;gap:10px;font-weight:650;color:var(--text);margin-bottom:10px;"><span>Minerva</span></div>
+      <div class="note">A local-first desktop workspace for thinking with AI.</div>
+    </div>
+    <div class="cols">
+      <div class="col"><h4>Product</h4><a href="../features.html">Features</a><a href="../getting-started.html">Getting Started</a><a href="../getting-started.html">Download</a></div>
+      <div class="col"><h4>Learn</h4><a href="../about.html">About</a><a href="../privacy.html">Privacy</a><a href="index.html">Docs</a></div>
+      <div class="col"><h4>Source</h4><a href="#">GitHub</a><a href="#">Releases</a><a href="#">License</a></div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
