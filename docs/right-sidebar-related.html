@@ -127,14 +127,6 @@
       <div class="d">The right sidebar's Related panel listing several results — a mix of note and source kind icons, each with a muted similarity bar, a section-heading breadcrumb, and a two-line snippet — with the top row showing the faint left-edge accent and link/dismiss buttons that mark an unlinked, high-similarity suggestion.</div>
     </div>
 
-    <h2 id="gotchas">Gotchas</h2>
-    <ul>
-      <li><b>A brand-new note has nothing to compare yet.</b> Related depends on the note's own content already being embedded; a note you just created and haven't saved with any real text yet won't have a meaningful vector, so the panel reads as empty rather than showing weak or irrelevant matches.</li>
-      <li><b>A small project may not have enough to suggest.</b> With only a handful of notes, or notes that don't overlap in subject matter, "No related notes found" is a normal, expected result — it isn't a sign anything is broken.</li>
-      <li><b>Indexing takes a moment on a project that's new to semantic search.</b> The first time embeddings are enabled for a thoughtbase, a background backfill has to embed the existing corpus; until that finishes, the panel shows an indexing message rather than treating an empty result as final.</li>
-      <li><b>Semantic search can be unavailable entirely.</b> If the vector store isn't initialized for the current project, the panel says so plainly instead of pretending there are no matches.</li>
-    </ul>
-
     <div class="pager">
       <a class="prev" href="right-sidebar-tags.html">
         <span class="dir">Previous</span>

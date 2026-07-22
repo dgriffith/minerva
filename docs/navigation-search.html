@@ -154,13 +154,6 @@
     <h2 id="replace">Find and Replace</h2>
     <p>Switching to Replace mode adds a replacement field and a per-match checkbox next to every result (all checked by default), plus file-level checkboxes for bulk toggling. <b>Replace Selected</b> applies only the checked matches; <b>Replace All</b> applies every current match regardless of checkbox state. Each result row previews what the line will read after replacement. Replace re-reads every target file from disk at apply time — rather than trusting what was on screen at search time — so a file changed since your last search is replaced against its current content, not a stale snapshot.</p>
 
-    <h2 id="gotchas">Gotchas</h2>
-    <ul>
-      <li><b>Reads from disk, not from memory.</b> Search has no dependency on the graph index — it's a fresh filesystem read on every keystroke. But that cuts both ways: if you have unsaved edits in an open editor tab, Search won't see them (or will still show old text) until the file is actually saved to disk.</li>
-      <li><b>No fuzzy matching here.</b> Unlike <a href="navigation-quick-switch.html">Quick switch</a>'s multi-strategy fuzzy scoring, Search is a literal substring or regex match — nothing in between. A typo in your query simply won't match.</li>
-      <li><b>A literal <code>]</code> or regex metacharacter needs the right mode.</b> With the regex toggle off, everything you type — including characters like <code>.</code> or <code>*</code> — is escaped and matched literally. Turn on <code>.*</code> if you actually want regex semantics.</li>
-    </ul>
-
     <h2 id="contrast">Search vs. Quick switch vs. the command palette</h2>
     <p>The three sit side by side in the left sidebar for a reason — each answers a different question:</p>
 

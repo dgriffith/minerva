@@ -159,15 +159,6 @@ effect size.[^size]
       <div class="k">Screenshot — Footnotes panel</div>
       <div class="d">The right-sidebar Footnotes panel showing several footnote rows with their label badges and body previews, including one flagged "DEFINED · NEVER USED" and one flagged "REFERENCED · NOT DEFINED".</div>
     </div>
-
-    <h2 id="gotchas">Gotchas</h2>
-    <ul>
-      <li><b>Duplicate labels.</b> Define each label once. If two definitions share a label, hover previews and click-to-jump resolve to the first one, and the second silently loses.</li>
-      <li><b>Reusing a reference is fine.</b> The same <code>[^label]</code> can appear several times in the text, all pointing at one definition. Clicking the definition jumps to the <em>first</em> use; the Footnotes panel does the same.</li>
-      <li><b>Definitions must start at column zero.</b> An indented <code>[^label]:</code> line isn't a new definition — it reads as a continuation of the footnote above it (or as plain text).</li>
-      <li><b>Punctuation placement.</b> The convention is marker <em>after</em> punctuation: <code>word.[^1]</code>, not <code>word[^1].</code> The formatter's <b>Footnote reference after punctuation</b> rule fixes this automatically when you format a note.</li>
-    </ul>
-
     <div class="pager">
       <a class="prev" href="notes-media.html">
         <span class="dir">Previous</span>

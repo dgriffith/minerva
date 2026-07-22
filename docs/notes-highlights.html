@@ -136,15 +136,6 @@ Flagged for review: ==orange:re-check this once the index rebuild finishes==.</c
       <p>Highlight tints are defined as CSS custom properties per theme, not fixed colors — the same five palette names (<code>yellow</code>, <code>green</code>, <code>blue</code>, <code>pink</code>, <code>orange</code>) resolve to different underlying values in Honey, Light, and Contrast, so a highlight stays legible and on-palette no matter which theme you're using. The editor and preview both derive their tint from the same source, so a highlight looks the same intensity in both places.</p>
     </div>
 
-    <h2 id="gotchas">Gotchas</h2>
-    <ul>
-      <li><b>Other inline formatting nests fine.</b> The text inside <code>==…==</code> is re-parsed as regular inline markdown, so <code>==**bold**==</code>, <code>==[[wiki-link]]==</code>, and similar combinations work as you'd expect — the highlight wraps around the other formatting rather than blocking it.</li>
-      <li><b>Bold can wrap a highlight too.</b> <code>**==highlighted==**</code> resolves outermost-in — the bold applies around the highlighted span — so both directions of nesting are supported.</li>
-      <li><b>Unrecognized color prefixes aren't stripped.</b> Only the five palette names count as a color. <code>==note:remember this==</code> isn't read as a <code>note</code>-colored highlight — the whole thing, prefix included, is just the highlighted text.</li>
-      <li><b>An empty color prefix falls back to plain.</b> <code>==yellow:==</code> has no body left after the color name, so it isn't treated as a valid highlight with an empty label — it's left uncolored so you can still see what you wrote.</li>
-      <li><b>Highlights are inline-only.</b> A newline inside the marker ends the match before it closes — a highlight can't span multiple lines or wrap a whole paragraph.</li>
-    </ul>
-
     <div class="pager">
       <a class="prev" href="notes-footnotes.html">
         <span class="dir">Previous</span>

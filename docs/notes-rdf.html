@@ -138,14 +138,6 @@ this: a thought:Term ;
     <p>Every note has its own named graph in the store, keyed by the note's IRI — this is what lets Minerva cleanly drop and rebuild a single note's triples on reindex without touching anyone else's. A <code>turtle</code> block doesn't get a graph of its own: its triples land in that same per-note named graph, mixed in with the title, tags, links, and frontmatter triples Minerva generated automatically. There's no separate namespace or provenance marker distinguishing a hand-authored triple from an extracted one — once it's in the graph, it's just a triple in this note's graph.</p>
     <p>Re-editing the block and saving again re-parses and replaces it, same as any other change to the note: reindexing clears the note's entire named graph first, then rebuilds it from scratch.</p>
 
-    <h2 id="gotchas">Gotchas</h2>
-    <ul>
-      <li><b>The tag is exactly <code>turtle</code>.</b> <code>```ttl</code> and <code>```rdf</code> are not recognized — the block just renders as a plain code sample and none of its content reaches the parser.</li>
-      <li><b>A malformed block doesn't break the note.</b> If a block fails to parse — a stray bracket, a missing period, an undeclared prefix you didn't mean to leave off — Minerva logs the error and skips that block. Every other part of the note (and any other <code>turtle</code> blocks in the same file) still indexes normally.</li>
-      <li><b>A skipped block fails quietly in the UI.</b> There's no inline squiggle or banner marking a block as broken — check the main process console if triples you expected aren't showing up in a query.</li>
-      <li><b>Blank nodes are fine.</b> <code>_:x</code>-style blank nodes work as you'd expect for structure you don't need to address from outside the block.</li>
-    </ul>
-
     <div class="pager">
       <a class="prev" href="notes-tasks.html">
         <span class="dir">Previous</span>

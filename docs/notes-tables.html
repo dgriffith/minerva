@@ -145,14 +145,6 @@
       <p>There's no caption, id, or frontmatter flag that marks a table as "graph-worthy." Any syntactically valid table — header row, separator row, at least one data row — is extracted automatically. A table with a header and separator but zero data rows is the one exception: it's dropped silently, both from rendering as a meaningful table and from the graph. There's no way to write a markdown table that's decorative-only and keep it out of the graph; if you don't want tabular content indexed, it can't be a markdown table.</p>
     </div>
 
-    <h2 id="gotchas">Gotchas</h2>
-    <ul>
-      <li><b>Alignment is display-only.</b> The <code>:---</code> / <code>---:</code> / <code>:---:</code> markers control text alignment in preview and nowhere else — that information isn't captured when a table is extracted into the graph. A SPARQL query over a table's cells can't tell you which columns were right-aligned.</li>
-      <li><b>Escaped pipes render correctly but don't extract correctly.</b> Preview handles <code>\|</code> as a literal pipe character inside a cell. The graph indexer's table parser doesn't — it splits naively on every <code>|</code>, so a cell written as <code>a \| b</code> shows up as one cell in preview but as extra, misaligned cells in the CSVW triples. Avoid literal pipes in cell content if you plan to query that table.</li>
-      <li><b>Tables inside code fences aren't extracted.</b> A pipe table written as an example inside a fenced code block renders as code, not a table, and is correctly excluded from graph indexing.</li>
-      <li><b>This isn't the CSV/DuckDB pipeline.</b> The right sidebar's <b>Tables</b> panel lists tables referenced by <code>```sql</code> fences and registered <code>.csv</code> files in your project — a separate, SQL-oriented feature. It doesn't show markdown tables or CSVW data. The only way to see a markdown table's extracted triples today is a graph query.</li>
-    </ul>
-
     <div class="pager">
       <a class="prev" href="notes-code.html">
         <span class="dir">Previous</span>

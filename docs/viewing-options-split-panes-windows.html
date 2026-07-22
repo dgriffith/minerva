@@ -155,14 +155,6 @@
       </div>
     </div>
 
-    <h2 id="gotchas">Gotchas</h2>
-    <ul>
-      <li><b>Closing a pane's last tab collapses the pane.</b> Close every tab in a split pane (one at a time, or via Close All) and the now-empty pane collapses out of the layout tree automatically, handing its space back to its sibling — you don't end up staring at a blank pane. The one exception is a window with a single pane and no split: that one stays, showing its normal empty "no file open" state, since a window always keeps at least one pane.</li>
-      <li><b>A new window starts blank, not cloned.</b> New Window never copies the current window's open tabs, panes, or project — it's a fresh window exactly like the one you'd get from launching the app again. If you want the same project open a second time, you open it again from the new window's File menu (or Recent Thoughtbases).</li>
-      <li><b>Same project across windows means shared state, not synced UI.</b> The graph and indexes are shared and stay consistent, but each window's panes, tabs, and view modes are independent — closing a pane in one window has no effect on the other.</li>
-      <li><b>Drag vs. click targets differ by pixel region.</b> The edge bands that trigger a split are the outer quarter of a pane on each side; the inner half plus the entire tab bar is the "move without splitting" zone. If a drag keeps splitting when you meant to move a tab into a pane, drop closer to its center or onto its tab bar instead.</li>
-    </ul>
-
     <div class="pager">
       <a class="prev" href="viewing-options-font-size-zoom.html">
         <span class="dir">Previous</span>

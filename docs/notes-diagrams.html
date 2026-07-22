@@ -145,13 +145,6 @@ sequenceDiagram
       <p>Minerva initializes Mermaid on the <code>base</code> theme and overrides its variables with the app's own Catppuccin tokens — background, text, borders, node fill, and accent all come from the same CSS custom properties the rest of the note uses. Switch Minerva's theme (dark, light, or contrast) and diagrams redraw to match; there's no separate diagram theme to configure.</p>
     </div>
 
-    <h2 id="gotchas">Gotchas</h2>
-    <ul>
-      <li><b>A syntax error renders inline, not as raw text.</b> If Mermaid can't parse the fence content, the block shows a small "Mermaid error" panel with the underlying error message in place of the diagram — the rest of the note keeps rendering normally. Fix the definition and the diagram appears in its place.</li>
-      <li><b>Re-rendering is idempotent.</b> A diagram block is marked once it's rendered, so re-running the preview's hydration pass (for example after an unrelated edit elsewhere in the note) doesn't redraw diagrams that already succeeded.</li>
-      <li><b>No live player, no external calls.</b> Rendering happens entirely locally through the bundled Mermaid library — nothing about a diagram's content is sent anywhere.</li>
-    </ul>
-
     <div class="pager">
       <a class="prev" href="notes-math.html">
         <span class="dir">Previous</span>

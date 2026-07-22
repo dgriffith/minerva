@@ -110,14 +110,6 @@
       <div class="d">A note draft card inline in the conversation transcript: the bold headline ("2 notes"), the AI's one-line rationale, an expandable list of the proposed note paths with a collapsed preview, and the Approve &amp; file / Discard button row along the bottom edge.</div>
     </div>
 
-    <h2 id="gotchas">Gotchas</h2>
-    <ul>
-      <li><b>"Accept" doesn't mean "unreviewed."</b> Because Accept immediately approves the resulting proposal, a filed draft won't show up under the Proposals panel's Pending tab — it lands directly in Approved, same as a <code>notify_only</code>-tier write. If you want a record of what an AI conversation has filed, look under Approved, not Pending.</li>
-      <li><b>Discarding is final, not a rejection record.</b> Unlike rejecting a proposal in the Proposals panel — which keeps a <code>rejected</code> node in the graph as an audit trail — discarding a draft card never created a graph node to begin with, so there's nothing left behind to show the AI once suggested it.</li>
-      <li><b>The compute draft's "edit" is a local buffer, not a re-prompt.</b> Editing the code in a compute card changes only what gets executed or inserted; it doesn't send your edit back to the model or change the conversation transcript. If you want the AI to reconsider its approach, ask again rather than relying on your edit to inform its next turn.</li>
-      <li><b>Refactor, reorg, and delete drafts can be partial.</b> <code>ReorgDraftCard</code> and <code>DeleteDraftCard</code> let you select a subset of the proposed items before accepting — accept only applies to what's checked, the rest of the card's suggestions are silently dropped, not held over as a smaller draft.</li>
-    </ul>
-
     <div class="pager">
       <a class="prev" href="conversations-chatting.html">
         <span class="dir">Previous</span>

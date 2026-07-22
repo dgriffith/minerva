@@ -130,15 +130,6 @@
       <span class="label">Where the trust prompt actually is</span>
       <p>The tab's sub-line in the Settings menu reads "Python interpreter · trust," but there's no toggle for it here — the trust model isn't a setting you configure in advance, it's a one-time confirmation dialog that appears the first time you run a Python cell in a given project. Declining leaves the cell unrun until you approve it later; approving is remembered for the rest of that project. That prompt, what it gates, and why SPARQL and SQL fences skip it entirely, are covered in <a href="notes-code.html#trust">Code &amp; compute cells — Approval and the knowledge graph</a>. This page is only about which interpreter binary gets used once that trust is in place.</p>
     </div>
-
-    <h2 id="gotchas">Gotchas</h2>
-    <ul>
-      <li><b>A saved path that stops existing fails at run time, not save time.</b> Saving doesn't validate the path — Probe does, but Save doesn't require a successful probe first. If an interpreter gets uninstalled, moved, or was on a drive that's no longer mounted, the saved override stays in place and the next cell run simply fails with the interpreter's own error text in the output block. Come back to this tab, Probe to confirm, and Browse to a valid binary.</li>
-      <li><b>It's per-machine, so it doesn't travel with the project.</b> Open the same thoughtbase on another computer and it resolves the interpreter fresh on that machine — the environment variable or <code>python3</code> on that machine's <code>PATH</code>, unless you set an override there too. A project's notes never encode which interpreter produced their output.</li>
-      <li><b>Restarting the kernel is a real reset.</b> Any variable, DataFrame, or import built up across a note's Python cells is gone after Save &amp; Restart Kernel. If you need that state, re-run the note's cells from the top afterward rather than assuming Minerva carries anything forward.</li>
-      <li><b>Probing the empty field probes the resolver, not "nothing."</b> With the path field blank, Probe still runs against whatever <code>MINERVA_PYTHON</code> or <code>python3</code> would resolve to — so a failed probe on an empty field usually means neither of those is set up, not that probing was skipped.</li>
-    </ul>
-
     <div class="pager">
       <a class="prev" href="settings-clipper.html">
         <span class="dir">Previous</span>

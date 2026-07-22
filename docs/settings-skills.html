@@ -147,13 +147,6 @@
       <div class="d">The Skills settings panel: the Import skill… / Reveal skills folder / Reload button row at top, and below it a skill row expanded to show its model picker set to a specific model (not the "Default · …" option) alongside the existing enable checkbox, reorder arrows, and menu dropdown.</div>
     </div>
 
-    <h2 id="gotchas">Gotchas</h2>
-    <ul>
-      <li><b>Overrides don't survive a restart yet.</b> The override map is written to disk correctly when you close Settings, but the setting isn't read back on the next load — so a per-skill model choice quietly reverts to "Default" the next time you reopen Minerva (or the Settings dialog after a reload). Re-set it if a skill seems to have forgotten its pinned model; nothing else in your settings is affected.</li>
-      <li><b>The override is per-skill, not per-menu or per-category.</b> Two skills that share a menu can run on two different models; there's no bulk "set this menu to Haiku" control, only the per-row picker.</li>
-      <li><b>Importing doesn't create an override.</b> A freshly imported skill has no entry in the override map — it runs on its own <code>model:</code> preference or the global default until you explicitly pick something for it.</li>
-    </ul>
-
     <p>For enabling, disabling, reassigning a skill to a different menu, or reordering it within one — the mechanics that make up the rest of this tab — see <a href="thinking-tools-managing-authoring.html">Thinking tools → Managing &amp; authoring</a>.</p>
 
     <div class="pager">

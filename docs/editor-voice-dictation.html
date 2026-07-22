@@ -142,16 +142,6 @@
       <div class="d">A note in the editor mid-dictation: the cursor sits in the body text, and the floating recording pill at the bottom of the window shows a pulsing "Listening…" indicator with the ⌘⇧V hint and Insert/Cancel buttons.</div>
     </div>
 
-    <h2 id="gotchas">Gotchas</h2>
-    <ul>
-      <li><b>First use downloads a model.</b> The first time you dictate (or the first time after switching models in Settings), Minerva fetches the model file before it can transcribe — the default Base model is roughly 50MB. The floating pill shows download progress; every dictation after that is instant, served from the browser cache.</li>
-      <li><b>Microphone permission is asked once by the OS.</b> The first recording attempt triggers the normal macOS/Windows microphone permission prompt. If it's denied, the pill reports it plainly rather than failing silently; you'll need to grant microphone access to Minerva in your system settings before trying again.</li>
-      <li><b>English only.</b> All three bundled Whisper variants are English-only models — there's no language picker, and accuracy on other languages will be poor to unusable.</li>
-      <li><b>A very short clip is treated as a no-op.</b> Toggling dictation on and immediately off again (under roughly a fifth of a second of audio) inserts nothing rather than erroring — useful if you trigger the shortcut by accident.</li>
-      <li><b>It's a whole-clip transcription, not live streaming.</b> Minerva records the entire dictation first and transcribes it as one pass when you stop, so there's no word-by-word text appearing as you speak — the transcript arrives all at once, right after you stop.</li>
-      <li><b>One microphone at a time.</b> Recording is a single shared engine — starting a dictation in the editor while the composer's mic is active (or vice versa) isn't a supported combination; only one surface can be recording at once.</li>
-    </ul>
-
     <div class="pager">
       <a class="prev" href="editor-link-autocomplete.html">
         <span class="dir">Previous</span>

@@ -129,13 +129,6 @@
       <p>What you're looking at in Source is the exact text of the <code>.md</code> file on disk, styled — not a separate rendering pass like Preview's. There's no intermediate "draft" state: every keystroke is the buffer, and every save re-indexes it into the knowledge graph immediately, the same as any other edit. See <a href="notes.html#lifecycle">Notes</a> for how saves feed <code>.minerva/graph.ttl</code>.</p>
     </div>
 
-    <h2 id="gotchas">Gotchas</h2>
-    <ul>
-      <li><b>Plain-text files skip all of this.</b> A file Minerva treats as plain text (not markdown) gets the bare editing buffer with no markdown language, no link/footnote/highlight decorations, and no compute-cell gutter — <code>Editor.svelte:467-535</code> gates the entire markdown rendering stack behind a markdown check.</li>
-      <li><b>Delimiters are never hidden.</b> If you're coming from an editor that conceals <code>**</code>/<code>#</code>/<code>[[…]]</code> until the cursor is nearby, expect Minerva's Source pane to look "busier" — that's deliberate, so what you see always matches what's actually in the file.</li>
-      <li><b>Links are marks, not widgets.</b> The chip styling on a wiki-link doesn't replace the text with something else — you can still click into the middle of <code>[[Some Note]]</code> and edit the target directly, because the brackets and text are still real, editable characters underneath the styling.</li>
-    </ul>
-
     <div class="pager">
       <a class="prev" href="editor.html">
         <span class="dir">Previous</span>

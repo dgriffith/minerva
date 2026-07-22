@@ -152,13 +152,6 @@
     <h2 id="graph">How this feeds the rest of the app</h2>
     <p>Every tag on a note is indexed into <code>.minerva/graph.ttl</code> the moment the note is saved, the same as titles, wiki-links, and frontmatter metadata generally. That indexing is what makes both Tags panels, tag-based <a href="../features.html">SPARQL</a> queries, and the auto-tag skill's "don't repeat an existing tag" check all possible — this panel is simply the narrowest lens onto that same graph data, filtered down to one note.</p>
 
-    <h2 id="gotchas">Gotchas</h2>
-    <ul>
-      <li><b>No tags in the note, no tree.</b> A note with no tags at all — inline or frontmatter — shows a plain "No tags in this note" message instead of an empty tree.</li>
-      <li><b>A code block's <code>#</code> doesn't count.</b> Text inside fenced or inline code is stripped before the panel looks for <code>#hashtag</code> matches, so a shell comment or a Markdown heading marker inside a code span won't accidentally show up as a tag.</li>
-      <li><b>Ancestor rows aren't "real" tags.</b> A synthesized parent segment (e.g. <code>foo</code> above a note tagged only <code>foo/bar</code>) exists to make the tree readable, not because the project has a tag called exactly that — don't expect it to appear in the left sidebar's project-wide list unless some note is tagged with that shorter form directly.</li>
-    </ul>
-
     <div class="pager">
       <a class="prev" href="right-sidebar-citations.html">
         <span class="dir">Previous</span>

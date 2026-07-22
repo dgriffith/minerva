@@ -158,7 +158,7 @@
       </div>
       <div class="row">
         <div class="k"><kbd>⌘</kbd><kbd>F</kbd></div>
-        <div class="v">Open CodeMirror's built-in search panel, scoped to the current editor tab only. Not the same as project-wide search — see the gotcha below.</div>
+        <div class="v">Open CodeMirror's built-in search panel, scoped to the current editor tab only.</div>
       </div>
       <div class="row">
         <div class="k"><kbd>⌘</kbd><kbd>H</kbd></div>
@@ -232,15 +232,6 @@
         <div class="v">Close the active tab, when one is open.</div>
       </div>
     </div>
-
-    <h2 id="gotchas">Gotchas</h2>
-    <ul>
-      <li><b>⌘P is Quick switch, not a preview toggle.</b> Unlike some other markdown editors, Minerva reserves <kbd>⌘</kbd><kbd>P</kbd> for <a href="navigation-quick-switch.html">Quick switch</a>. Cycling the preview mode is <kbd>⌘</kbd><kbd>⇧</kbd><kbd>P</kbd> instead, matching the Linear / VS Code convention rather than Obsidian's.</li>
-      <li><b>Join Lines doesn't follow the Cmd/Ctrl swap.</b> It's bound as <code>Ctrl-Shift-j</code> in <code>COMMAND_REGISTRY</code> on every platform, including macOS — the one formatting/editing shortcut on this page that isn't <kbd>⌘</kbd> on Mac.</li>
-      <li><b>⌘F/⌘H vs ⌘⇧F/⌘⇧H.</b> The un-shifted pair searches only the current tab (CodeMirror's own panel); the shifted pair searches the whole project (<a href="navigation-search.html">Find in Notes…</a>). Easy to reach for the wrong one out of habit from a single-file editor.</li>
-      <li><b>Most paragraph-level formatting has no default key.</b> Headings, quotes, lists, task lists, tables, horizontal rules, and footnote insertion are registry commands with an empty <code>defaultKey</code> — reach them from the Insert/Format menus, the command palette, or bind your own key in Settings.</li>
-      <li><b>Every shortcut is remappable.</b> If a combo on this page doesn't do what's described, check Settings for a user override before assuming the docs are stale.</li>
-    </ul>
 
     <div class="pager">
       <a class="prev" href="editor-markdown-formatting.html">

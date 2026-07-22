@@ -118,15 +118,6 @@
       <p>Nothing here writes a citation into a note. You cite a source with <code>[[cite::sourceId]]</code> or quote a saved excerpt with <code>[[quote::excerptId]]</code> in the note body, then run <b>Refactor → Insert/Update Bibliography</b> to scan the note for those links and render a <code>## References</code> section in the style configured on this tab. Re-running it is idempotent — it replaces its own previously-rendered block (tracked by an HTML comment pair) without disturbing any prose you've added around it, so it's safe to run again after adding more citations.</p>
     </div>
 
-    <h2 id="gotchas">Gotchas</h2>
-    <ul>
-      <li><b>Styles and locales live in separate directories.</b> An imported <code>.csl</code> file goes in <code>.minerva/csl-styles/</code>; an imported locale XML goes in <code>.minerva/csl-locales/</code> — dropping one in the other's folder means it's silently never picked up.</li>
-      <li><b>The style choice is per-project, not global.</b> Switching thoughtbases can mean switching bibliography styles too — check this tab if a freshly-opened project's References section renders differently than you expected.</li>
-      <li><b>An imported style or locale with the same id as a bundled one wins.</b> Project files always take precedence over the bundled set on a filename collision, so you can override, say, <code>apa.csl</code> with your own variant without touching app source — but it also means a badly-named import can silently shadow a built-in style.</li>
-      <li><b>No live reference-manager connection.</b> There's no Zotero or Mendeley account to sign into here — building up a library happens once, via <b>File → Import BibTeX…</b> / <b>Import Zotero RDF…</b> or one-at-a-time ingest in the Sources panel. See <a href="left-sidebar-sources.html">Left sidebar → Sources</a> for those flows.</li>
-      <li><b>A cited id citeproc can't resolve doesn't block the rest.</b> Insert/Update Bibliography still renders every entry it can; unresolved ids are surfaced separately rather than failing the whole command.</li>
-    </ul>
-
     <div class="pager">
       <a class="prev" href="settings-formatter.html">
         <span class="dir">Previous</span>

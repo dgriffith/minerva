@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Minerva — Docs — Math</title>
-<meta name="description" content="Math in Minerva notes: the $…$ inline and $$…$$ block delimiters, how both render through KaTeX, and gotchas around malformed LaTeX and math inside tables." />
+<meta name="description" content="Math in Minerva notes: the $…$ inline and $$…$$ block delimiters and how both render through KaTeX." />
 <link rel="stylesheet" href="../minerva.css" />
 <link rel="stylesheet" href="docs.css" />
 </head>
@@ -126,17 +126,6 @@ $$</code></pre>
       <span class="label">Malformed LaTeX doesn't break the preview</span>
       <p>An equation KaTeX can't parse renders as an inline error span showing the raw source, rather than failing the whole note's preview. Hovering the error span shows KaTeX's parse error as a tooltip, so you can see exactly what's wrong without leaving the note.</p>
     </div>
-
-    <h2 id="gotchas">Gotchas</h2>
-    <ul>
-      <li><b>Unsupported LaTeX commands.</b> Minerva renders whatever KaTeX supports — a large but not complete subset of LaTeX math. A command from a package KaTeX doesn't implement will render as the error span described above rather than being silently dropped.</li>
-      <li><b>No space right after the opening <code>$</code> or before the closing <code>$</code>.</b> This is intentional, so ordinary prose mentioning money — "cost: $5 today, $50 tomorrow" — doesn't get swept into a math span. <code>$x+1$</code> is math; <code>$ x+1 $</code> is not. Digits right after the opening <code>$</code> are fine (<code>$0.6&lt;z&lt;4$</code> works), just not whitespace.</li>
-      <li><b>No blank line inside inline math.</b> An unescaped line break inside a <code>$…$</code> span ends the match instead of continuing it — keep inline math on one line. Block <code>$$…$$</code> math is fine spanning multiple lines.</li>
-      <li><b>Escaping a literal dollar sign.</b> Write <code>\$</code> to show a literal dollar sign next to math-like content without triggering inline math.</li>
-      <li><b>Math inside code fences and inline code is left alone.</b> A <code>$…$</code> written inside a fenced code block or inline <code>`code`</code> span is shown as literal text, never rendered as math.</li>
-      <li><b>Table cells render math normally.</b> A markdown table cell goes through the same inline-rendering pipeline as body text, so <code>$…$</code> works unescaped inside a cell — no special escaping needed beyond the rules above.</li>
-      <li><b>Note frontmatter is not rendered as markdown.</b> The YAML frontmatter block is stripped out before the note body is rendered, so <code>$…$</code> in a frontmatter value is shown as plain text in the frontmatter panel, not as math. (The Source viewer's title and abstract fields are the exception — see <a href="notes-frontmatter.html">Frontmatter</a> for where properties do and don't get markdown treatment.)</li>
-    </ul>
 
     <div class="pager">
       <a class="prev" href="notes-callouts.html">

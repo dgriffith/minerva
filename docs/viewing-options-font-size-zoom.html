@@ -105,14 +105,6 @@
       <p>Zoom scales the entire rendered page, and the editor's font size is just a CSS pixel value on that page — so zooming in on a window where you've already bumped the editor font up to 20px gives you 20px text rendered at, say, 110% larger again. If text looks too big, check both controls rather than assuming one setting reset the other.</p>
     </div>
 
-    <h2 id="gotchas">Gotchas</h2>
-    <ul>
-      <li><b>Zoom resets every launch; editor font size doesn't.</b> Editor font size is saved to <code>localStorage</code> and survives restarts. Zoom is Electron's in-memory <code>webContents</code> zoom factor — Minerva doesn't persist it anywhere, so a zoomed window goes back to 100% the next time you open the app.</li>
-      <li><b>Zoom has no reset shortcut for the editor specifically.</b> <kbd>⌘</kbd><kbd>0</kbd> resets whole-window zoom to 100%; it does not touch your editor font-size setting. To get the editor back to its default 14px, use View → Reset Editor Font Size.</li>
-      <li><b>Editor font size is clamped, zoom isn't (by Minerva).</b> The editor setting can't go below 10px or above 24px — the menu commands simply stop moving it further once you hit either end. Zoom uses Chromium's own built-in limits, which are much wider and not something Minerva restricts.</li>
-      <li><b>No Settings-panel control for either.</b> Both are menu commands (with keyboard shortcuts) rather than fields in <a href="settings.html">Settings</a> — there's nothing to type a specific pixel size or zoom percentage into.</li>
-    </ul>
-
     <div class="pager">
       <a class="prev" href="viewing-options-themes.html">
         <span class="dir">Previous</span>

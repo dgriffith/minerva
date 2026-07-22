@@ -123,15 +123,6 @@
       <p>It's easy to expect "graph" here to mean cross-links — headings connected because one references another by name or wiki-link. It doesn't: every edge is strictly a nesting relationship derived from heading levels, identical in substance to what Outline's indentation already encodes. A wiki-link typed inside a heading's own text doesn't add an edge to anything; the graph never looks at heading content, only at heading level and document order.</p>
     </div>
 
-    <h2 id="gotchas">Gotchas</h2>
-    <ul>
-      <li><b>No headings, no graph.</b> A note with no headings shows a plain "No headings to map" message instead of a lone root node — there's nothing to lay out.</li>
-      <li><b>Completely flat documents still branch tidily.</b> A note that only ever uses one heading level (say, every heading is an H2) doesn't collapse into a single connected line — each of those headings attaches directly to the root, so the graph reads as one hub with several spokes rather than a chain.</li>
-      <li><b>Very few headings can look sparse.</b> A note with one or two headings renders a root with one or two children and not much else — Outline's compact list is the more legible choice at that scale; the graph earns its keep on notes with real branching structure.</li>
-      <li><b>Very many headings get crowded.</b> On a note with dozens of headings, the top-down layout can grow wide and require noticeable panning and zooming to read a single branch. Outline's scrollable list stays more compact for that case.</li>
-      <li><b>Duplicate heading text is fine.</b> Two headings with identical text still get separate nodes, each wired to its own line — nothing here is keyed by text.</li>
-    </ul>
-
     <h2 id="contrast">Heading graph vs. Outline</h2>
     <p>Both panels are views onto the exact same parsed heading list, kept in lockstep by sharing the same underlying extraction — they will never show different headings or different nesting for the same note. The difference is purely presentational:</p>
 

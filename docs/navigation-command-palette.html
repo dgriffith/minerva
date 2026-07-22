@@ -159,14 +159,6 @@
     </div>
     <p>The palette's footer states this literally: <code>↑↓ navigate · ↵ run · esc close</code>.</p>
 
-    <h2 id="gotchas">Gotchas</h2>
-    <ul>
-      <li><b>Commands only — never notes, sources, or queries.</b> The palette's candidate set is built entirely from the app's command registry (File, Edit, View, Navigate, Refactor, Research, Query, App). It never searches your notes, sources, or saved queries by title or content. If you're trying to jump to a note, open <a href="navigation-quick-switch.html">Quick switch</a> (<kbd>⌘</kbd><kbd>P</kbd>) instead.</li>
-      <li><b>Disabled commands still show up.</b> A command that isn't currently applicable (for example, an action that needs an active selection) still appears in the list, greyed out. It just can't be clicked or run until its precondition is met — the palette doesn't hide it.</li>
-      <li><b>No dimmed backdrop.</b> The editor stays fully visible and undimmed behind the palette; don't mistake this for a bug if you're used to a modal overlay from other apps.</li>
-      <li><b>Recent history is local and capped.</b> The last 10 run commands are remembered (in <code>localStorage</code>) to drive the recent-first empty-query ordering. It's per-machine, not synced with the project.</li>
-    </ul>
-
     <div class="pager">
       <a class="prev" href="navigation.html">
         <span class="dir">Previous</span>

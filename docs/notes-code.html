@@ -148,15 +148,6 @@
     <p>Both engines run the query you wrote, in full: a <code>sparql</code> fence executes through the same SPARQL engine as the Query panel, and a <code>sql</code> fence executes through the same DuckDB connection as your table sources. Every stock example is a read (<code>SELECT</code>, a graph pattern), and that's the intended use — but nothing in the compute shell parses your query to reject a write statement first. Treat a runnable fence with the same care as running a query in the Query panel itself. The SQL side has a natural backstop: that DuckDB connection is an in-memory instance rebuilt from your CSV sources each time the project opens, not a persisted database, so nothing a <code>sql</code> fence does to it outlives the session.</p>
     <p>The one place a compute cell touches the graph on its own is unrelated to what the cell does: when the AI proposes a cell inside a conversation (rather than you writing one directly in a note) and you click Run on that proposal, Minerva records a <code>thought:ComputeProposal</code> audit entry — what ran, when, and that it was already approved by your click. That's provenance for a thing you just confirmed, not a new claim awaiting review, so it isn't queued through the pending-proposal flow the way an AI-proposed claim or link would be.</p>
 
-    <h2 id="gotchas">Gotchas</h2>
-    <ul>
-      <li><b>The runnable list is exactly three languages.</b> <code>sparql</code>, <code>sql</code>, and <code>python</code> (plus the <code>py</code> / <code>python3</code> aliases for the last one). Everything else — including close cousins like <code>graphql</code> or <code>bash</code> — is highlighted only; there's no way to make an arbitrary language executable from within a note.</li>
-      <li><b>Case matters in spirit, not literally.</b> The language tag is matched case-insensitively, so <code>SPARQL</code> and <code>Sql</code> still get the run affordance — but stick to lowercase; it's what every stock example and the highlighter both expect.</li>
-      <li><b>An output block isn't free-standing.</b> It's tied to the fence directly above it. Insert a paragraph or heading between a source fence and its output block and Minerva can no longer tell they're related — re-running writes a fresh block instead of replacing the orphaned one.</li>
-      <li><b>Declining the Python trust prompt doesn't block SPARQL or SQL.</b> The prompt only gates Python's arbitrary-process execution — a <code>sparql</code> or <code>sql</code> fence always runs when you click ▶, whatever the query says. Write cells the way you'd write anything you're about to run yourself.</li>
-      <li><b>Recompute all stops on the first error.</b> It's a top-to-bottom re-run, not a best-effort sweep — fix the failing cell and run again to continue past it.</li>
-    </ul>
-
     <div class="pager">
       <a class="prev" href="notes-charts.html">
         <span class="dir">Previous</span>

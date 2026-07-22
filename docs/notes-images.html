@@ -226,17 +226,6 @@ The diagram above shows the flow from input to output.</code></pre>
 
     <p>Minerva normalizes paths automatically, so even if you write <code>../articles/../assets/logo.png</code>, it resolves to <code>../assets/logo.png</code> and works correctly. Paths are also protected — there's no way to use <code>..</code> to escape outside your project root.</p>
 
-    <h2 id="gotchas">Gotchas</h2>
-    <ul>
-      <li><b>Missing or broken paths.</b> If a relative path points to a file that doesn't exist or can't be read, the image renders with a broken-image indicator in preview (usually a missing-image icon), and the source editor highlights it visually. Check the path and make sure the file exists in the right location.</li>
-      <li><b>Case sensitivity.</b> On macOS and Windows, filenames are case-insensitive by default, but uploaded images use lowercase stems for deduplication. If you reference an image as <code>MyPhoto.jpg</code> and it's stored as <code>myphoto.jpg</code>, you might see inconsistent behavior on Linux (which is case-sensitive). Use consistent lowercase filenames or use the exact case returned by drag-and-drop uploads.</li>
-      <li><b>Special characters in filenames.</b> When you drag a file with spaces or special characters (e.g., <code>My Screenshot (2).png</code>), Minerva sanitizes the stored filename to <code>my-screenshot-2.png</code> for filesystem safety. The markdown reference is still inserted correctly, but don't manually rename or move files in the <code>.minerva/assets/inline/</code> directory — Minerva expects the hashed names to be stable.</li>
-      <li><b>External images and offline viewing.</b> Images linked by absolute URL (e.g., <code>https://example.com/image.png</code>) are fetched when you view the note. Without a network connection, the preview shows a broken-image icon. Local images work offline because they're stored in your project.</li>
-      <li><b>SVG injection and security.</b> SVG files embedded in notes run as part of the document, so they can include JavaScript or other embedded content. Minerva runs SVGs in a sandboxed context with strict CSP rules, so malicious scripts can't escape the preview. Still, be cautious with SVGs from untrusted sources — treat them like any executable code.</li>
-      <li><b>Very large images.</b> While Minerva stores images up to 5 MB, displaying very large images (e.g., 10000×10000 pixels) can slow down the preview or use a lot of memory. If you need high-resolution images, consider breaking them into tiles or using a lower-resolution version for the note.</li>
-      <li><b>Renamed or moved notes.</b> When you rename a note or move it to a different directory, the relative image paths break if you move the note without updating the image references. Use the file explorer or the refactoring tools to move notes — Minerva updates paths automatically when it can. If you move a note manually, the image links will have broken paths until you fix them.</li>
-    </ul>
-
     <div class="pager">
       <a class="prev" href="notes-tables.html">
         <span class="dir">Previous</span>

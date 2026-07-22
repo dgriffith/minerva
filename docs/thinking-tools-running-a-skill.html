@@ -106,7 +106,7 @@
 
     <div class="box">
       <span class="label">The trust principle still applies</span>
-      <p>A skill is a prompt template, not a shortcut around the approval engine. Whatever conversation a skill opens is bound by the same rule as a conversation you started yourself: <b>the LLM proposes, the human confirms.</b> See <a href="conversations-propose-review-approve.html">The propose, review, approve loop</a> for how the approval tiers work and <a href="right-sidebar-proposals.html">Proposals</a> for how to review and act on what a skill files.</p>
+      <p>A skill is a prompt template, not a shortcut around the approval engine. Whatever conversation a skill opens is bound by the same rule as a conversation you started yourself: <b>the LLM proposes, the human confirms.</b> See <a href="conversations-propose-review-approve.html">The propose, review, approve loop</a> for how the propose, review, approve loop works and <a href="right-sidebar-proposals.html">Proposals</a> for how to review and act on what a skill files.</p>
     </div>
 
     <div class="shot wide">
@@ -128,14 +128,6 @@
         <div class="v">A small number of skills (Excavate is a stock example) run in a bottom dock instead of opening a conversation: a streaming "Thinking…" view, then the finished text with <b>Save as Note</b>, <b>Append to Current</b>, and <b>Copy</b> buttons. This is a separate, older mechanism from the proposal system — choosing "Save as Note" writes the file immediately rather than filing a <code>thought:Proposal</code>. The explicit button click is still your confirmation step; it's just a different one than the diff-and-approve flow.</div>
       </div>
     </div>
-
-    <h2 id="gotchas">Gotchas</h2>
-    <ul>
-      <li><b>A skill can refuse to run before it ever reaches the model.</b> If a skill declares <code>requiresSelection</code> and you haven't highlighted anything, the menu item fails fast with a message telling you to select text first — the right-click menu hides the entry entirely in that case. Other skills check their context at prompt-build time instead: a claim-scoped skill invoked with no <code>thought:Claim</code> under the cursor throws a specific, readable error ("right-click on a claim line first") rather than sending an empty prompt to the model.</li>
-      <li><b>Running a skill over a note with nothing relevant in it doesn't error — it just produces a thin result.</b> A source-summarizing skill invoked with no extracted body text says so plainly in its first message rather than fabricating a summary; other skills without that guard will still run and the model will do its best with sparse input, which usually means a proposal not worth approving. Reviewing the diff before you approve is what catches this, not the tool refusing to run.</li>
-      <li><b>The skill only sees the context it declared, not everything about the note.</b> A skill listing only <code>selectedText</code> never sees the rest of the note, even though you invoked it while that note was open — if a skill seems to be ignoring context you'd expect it to use, check what its <code>context:</code> list actually requests (see <a href="thinking-tools-managing-authoring.html">Managing &amp; authoring</a>).</li>
-      <li><b>Cancel stops the run, not the proposal.</b> The direct-output panel has a Cancel button while it's streaming, which stops that call. A skill running as a conversation is cancelled the same way any conversation send is — but if the model already made its tool call before you cancelled, whatever it proposed is still sitting in the Proposals panel; cancelling doesn't retract a proposal already filed. Reject it there if you don't want it.</li>
-    </ul>
 
     <div class="pager">
       <a class="prev" href="thinking-tools-what-they-are.html">

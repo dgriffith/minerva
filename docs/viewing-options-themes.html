@@ -130,14 +130,6 @@
       <div class="d">The Settings dialog's Appearance tab, showing the "Theme" field with its dropdown open over the four options (Dark, Light, High Contrast, System) and the hint line below it noting the status-bar picker and the ⌘⇧T shortcut; the content-font field sits directly beneath.</div>
     </div>
 
-    <h2 id="gotchas">Gotchas</h2>
-    <ul>
-      <li><b>Whole-app, not per-note.</b> There's no way to pin one note or window to a different theme — every open window reflects the same stored preference.</li>
-      <li><b>"System" isn't a distinct palette.</b> It's an auto-selector that resolves to the Dark or Light token set depending on your OS appearance, and updates live if the OS setting changes while Minerva is running.</li>
-      <li><b>No custom CSS override.</b> Themes are fixed token sets shipped with the app; there's currently no user stylesheet or theme-editing surface to define your own.</li>
-      <li><b>Exports don't inherit your theme.</b> HTML and PDF exports (<code>src/main/publish/exporters/note-html/style.ts</code>) use their own fixed, print-friendly light stylesheet, independent of whichever app theme is active — a note exported while you're in High Contrast or Dark looks the same as one exported in Light.</li>
-    </ul>
-
     <div class="pager">
       <a class="prev" href="viewing-options-view-modes.html">
         <span class="dir">Previous</span>

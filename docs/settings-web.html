@@ -118,14 +118,6 @@
       <div class="k">Screenshot — Settings → Web tab</div>
       <div class="d">The Settings dialog's Web tab: the "Enable web access for conversations" checkbox at top with its hint line about web_search/web_fetch beneath it, followed by the "Allowed domains" textarea (placeholder "One domain per line (e.g. arxiv.org)") and its hint, then the "Blocked domains" textarea (placeholder "One domain per line") and its hint noting it's ignored when an allowlist is set.</div>
     </div>
-
-    <h2 id="gotchas">Gotchas</h2>
-    <ul>
-      <li><b>Turning web access off disables both textareas.</b> They gray out along with the rest of the tab's controls rather than just becoming inert — a visual confirmation that nothing typed into them matters while the master switch is off, not just a functional one.</li>
-      <li><b>The blocklist doesn't layer on top of the allowlist.</b> If you want to allow a broad set of sites except a couple of bad ones, that combination isn't expressible here — Allowed domains and Blocked domains are mutually exclusive from the model's perspective, matching how the underlying web tools accept one filter or the other, never both.</li>
-      <li><b>This setting doesn't touch anything outside conversations.</b> Citing a source into your library, fetching a page from the Clipper, and other web-touching features elsewhere in Minerva aren't gated by this toggle — it only governs whether the assistant can call <code>web_search</code>/<code>web_fetch</code> mid-conversation.</li>
-    </ul>
-
     <div class="pager">
       <a class="prev" href="settings-bibliography.html">
         <span class="dir">Previous</span>

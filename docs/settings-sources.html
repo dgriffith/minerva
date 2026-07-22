@@ -152,14 +152,6 @@
       <div class="d">The Sources settings tab showing the Ingest subsection with the "Import upstream subject tags on source ingest" checkbox and its hint text listing the three namespace examples, and the Privileged sites subsection below it with the add-site form (domain and label fields) and a configured site row showing its label, domain, last-login timestamp, and Login/Logout/Remove buttons.</div>
     </div>
 
-    <h2 id="gotchas">Gotchas</h2>
-    <ul>
-      <li><b>Longest-domain-suffix wins when sites overlap.</b> If you've added both a parent and a subdomain (unlikely, but possible), the fetch matches whichever configured domain is the more specific hostname suffix — not necessarily the one you added first.</li>
-      <li><b>Both settings are per-machine, not per-project.</b> Like the rest of the Settings dialog's ingest-adjacent panels, the upstream-tags toggle and the privileged-sites list live under your home directory (Electron's <code>userData</code>), so they follow you across every project you open on this machine but don't travel with the project itself.</li>
-      <li><b>Turning the tag toggle off is not retroactive.</b> It only changes what happens on the next identifier ingest — tags already on existing sources stay until you strip them manually, one source at a time, from that source's right-click menu.</li>
-      <li><b>A privileged site only helps if the fetch actually goes through Minerva.</b> It authenticates ingest-time fetches (URL ingest, identifier ingest, stub resolution) — it doesn't log the browser clipper in, and it doesn't make a paywalled site auto-ingest anything on its own.</li>
-    </ul>
-
     <div class="pager">
       <a class="prev" href="settings-web.html">
         <span class="dir">Previous</span>

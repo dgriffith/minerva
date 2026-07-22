@@ -134,14 +134,6 @@
       <p>Only the checkbox character on the matched line changes — the list marker, any indentation, and the rest of the item's text are preserved byte-for-byte. If the line doesn't match the task-item pattern (for example, the click somehow lands on a checkbox whose line was edited out from under it), nothing is written.</p>
     </div>
 
-    <h2 id="gotchas">Gotchas</h2>
-    <ul>
-      <li><b>No cascading.</b> Checking a parent task doesn't check its nested sub-tasks, and checking every sub-task doesn't check the parent. Each checkbox is an independent toggle on its own line.</li>
-      <li><b>Ordered-list task items work too.</b> <code>1. [ ] item</code> is recognized the same as a bulleted one — useful if you want a numbered procedure where steps can also be marked done.</li>
-      <li><b>Case is normalized on write.</b> Reading treats <code>[x]</code> and <code>[X]</code> as equally checked, but a toggle always writes lowercase <code>x</code> — an existing <code>[X]</code> becomes <code>[ ]</code> when unchecked, not back to <code>[X]</code>.</li>
-      <li><b>The save is debounced, not instant.</b> The checkbox flips visually the moment you click it, but the write to disk (and the graph re-index that follows) happens on the same short delay as any other keystroke. A manual save flushes it immediately.</li>
-    </ul>
-
     <div class="pager">
       <a class="prev" href="notes-highlights.html">
         <span class="dir">Previous</span>

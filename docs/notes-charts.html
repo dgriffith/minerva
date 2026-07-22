@@ -167,15 +167,6 @@
       <p>A Vega/Vega-Lite spec can normally point <code>data</code> at a <code>url</code> to fetch a file or a network resource. Minerva refuses that: a note can arrive from an import, the clipper, or someone else's shared vault, so a chart spec is untrusted input, and rendering it must not make an arbitrary network or filesystem request. A spec with a <code>url</code> anywhere in it renders a "Remote data disabled" notice instead of a chart — inline <code>data.values</code>, or one of the SPARQL/SQL/table/cell bindings above, are the only supported sources.</p>
     </div>
 
-    <h2 id="gotchas">Gotchas</h2>
-    <ul>
-      <li><b>Invalid JSON fails the whole block.</b> If the fence body doesn't parse as JSON, the chart is replaced with an inline "Vega error" showing the parse error — fix the syntax and it re-renders. A structurally valid spec that Vega-Lite/Vega itself rejects (unknown mark type, missing required encoding, and so on) surfaces the same way, with the library's own error message.</li>
-      <li><b>Fence language picks the dialect, not the JSON.</b> Pasting a full Vega spec into a <code>```vega-lite</code> fence (or vice versa) doesn't auto-detect — it just gets compiled by the wrong engine and fails. Match the fence tag to the spec you're writing.</li>
-      <li><b>A <code>url</code> anywhere in the spec blocks the whole chart</b>, even nested inside a layer or transform — not just at the top level. See the callout above.</li>
-      <li><b>Cell-bound charts need the cell to have run.</b> <code>data.cell</code> reads a stored output block from earlier in the note; if that compute cell hasn't been executed yet (or its last run errored), the chart shows "Chart data unavailable" instead of drawing empty axes.</li>
-      <li><b>Sizing follows the note column, not the spec's raw pixel size.</b> A wide fixed-width spec doesn't force a horizontal scrollbar — it scales down to fit. If a chart looks cramped, that's usually the note column, not the spec.</li>
-    </ul>
-
     <div class="pager">
       <a class="prev" href="notes-diagrams.html">
         <span class="dir">Previous</span>

@@ -129,13 +129,6 @@
       <p>"Open a thoughtbase to start the clipper and reveal its pairing code." The checkbox stays checked (the setting itself is saved), but the port and pairing-code fields don't appear until a project is actually open. Even a request that reaches the endpoint while no thoughtbase is open is answered, just with an error rather than a write — the ingest route responds <code>503 No thoughtbase open</code> rather than silently dropping the clip.</p>
     </div>
 
-    <h2 id="gotchas">Gotchas</h2>
-    <ul>
-      <li><b>Regenerating breaks the currently-paired extension.</b> This is the main surprise: rotating the code isn't additive. The moment you click Regenerate, the extension's stored secret is worthless, and its next clip attempt fails until you paste the fresh code into it.</li>
-      <li><b>The setting is per-machine, not per-project.</b> Like the rest of Settings' local config, enable state and the secret live under your user data directory, not inside the thoughtbase's <code>.minerva/</code> folder — so pairing done on one computer doesn't travel with the project to another.</li>
-      <li><b>The secret survives ordinary restarts.</b> Quitting and reopening Minerva (or closing and reopening a thoughtbase) keeps the same secret, so a paired extension keeps working without you needing to re-pair — only an explicit Regenerate, or hand-editing the on-disk config, invalidates it.</li>
-    </ul>
-
     <div class="pager">
       <a class="prev" href="settings-sources.html">
         <span class="dir">Previous</span>

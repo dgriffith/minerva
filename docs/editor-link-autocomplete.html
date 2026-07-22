@@ -105,7 +105,7 @@
       </div>
       <div class="row">
         <div class="k">No match</div>
-        <div class="v">If nothing in your notes matches, the list shows no items — there's no "Create new note" entry. See <a href="#gotchas">Gotchas</a> for the verified detail.</div>
+        <div class="v">If nothing in your notes matches, the list shows no items — there's no "Create new note" entry.</div>
       </div>
     </div>
 
@@ -116,14 +116,6 @@
       <div class="k">Screenshot — Link autocomplete open</div>
       <div class="d">The editor mid-line with an unclosed [[Mee typed, a completion popup open beneath the cursor listing filtered matches such as "Meeting Notes" and "Meeting Prep", one entry highlighted, with a note-path icon beside each.</div>
     </div>
-
-    <h2 id="gotchas">Gotchas</h2>
-    <ul>
-      <li><b>Typing text that matches no note does not create anything — the list is simply empty.</b> The completion source builds its option list strictly from existing note paths, aliases, headings, block ids, or sources, depending on which part of the link you're typing — there's no branch anywhere that synthesizes a "create new note" option from your typed text. If you finish typing a target that matches nothing and close the brackets yourself, you're left with a plain unresolved <code>[[...]]</code> link, exactly as if you'd typed it without ever seeing a suggestion. This mirrors the click-navigation behavior documented in <a href="navigation-wiki-links.html#gotchas">Navigation → Wiki-links</a> — an unresolved target is a quiet no-op there too, not an auto-create — so the two code paths agree even though they're independent.</li>
-      <li><b>Closing the brackets yourself has no special effect.</b> Autocomplete is purely an insert-before-you-finish-typing convenience. Typing the closing <code>]]</code> just ends the phase the popup was tracking; nothing is validated, created, or written at that moment.</li>
-      <li><b>Accepting mid-word eats the leftover tail, not just what's before the cursor.</b> If you're editing inside an existing link — say the cursor sits in the middle of <code>[[No|te]]</code> — accepting a suggestion also removes the contiguous run of word characters right after the cursor, so you get a clean <code>[[Notebook]]</code> instead of <code>[[Notebooknote]]</code>. It stops at the first non-word character, so it won't reach past a <code>]</code> or a <code>,</code>.</li>
-      <li><b>The popup closes at <code>|</code>.</b> Once you type the display-text separator, completion stops offering target suggestions — everything after <code>|</code> is free text, same as writing <code>[[target|display]]</code> by hand. See <a href="notes-links.html#syntax">Links → Syntax</a>.</li>
-    </ul>
 
     <div class="pager">
       <a class="prev" href="editor-keyboard-shortcuts.html">

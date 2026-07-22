@@ -121,15 +121,6 @@
       <div class="k">Screenshot — Citations panel with an expanded source</div>
       <div class="d">The right sidebar's Citations panel listing several cited sources as italic titles with author/year bylines and cite/quote count chips; one row is expanded to show two quoted excerpts indented beneath it with a locator like "p. 42" next to each.</div>
     </div>
-
-    <h2 id="gotchas">Gotchas</h2>
-    <ul>
-      <li><b>A citation key that doesn't resolve still gets a row.</b> If a <code>[[cite::id]]</code> or <code>[[quote::id]]</code> points at a source ID with no matching entry in the graph, that source is skipped entirely — it never enters the group set, so it won't show up as a broken row. Only sources the graph can actually resolve are listed, whether or not they have a title.</li>
-      <li><b>A resolved source with no title reads as "uncited."</b> If the source exists in the graph but has no title yet (a stub, or metadata still being fetched), its row shows the raw source ID in place of a title, in a warning color, with "N references · uncited" instead of a byline. It's still clickable — the warning is about missing metadata, not a broken link.</li>
-      <li><b>Bibliography blocks don't inflate the count.</b> Notes that embed a rendered bibliography block don't have their citation counts doubled by it — the panel strips that block before counting, so the numbers reflect inline <code>cite</code>/<code>quote</code> links only.</li>
-      <li><b>No citations, no rows.</b> A note with no <code>cite</code> or <code>quote</code> links shows a plain "No citations in this note" message — this panel only covers the source/excerpt typed links, not plain <code>references</code> links to other notes (see <a href="right-sidebar-backlinks.html">Backlinks</a> for those).</li>
-    </ul>
-
     <div class="pager">
       <a class="prev" href="right-sidebar-proposals.html">
         <span class="dir">Previous</span>

@@ -129,14 +129,6 @@
 
     <h2 id="empty">No backlinks</h2>
     <p>A note with nothing pointing at it shows <i>"No backlinks found"</i> in place of the list — this is expected for a new note, a leaf note, or anything you haven't linked to yet, not an error state. If backlinks exist but your filter text doesn't match any of them, the message changes to <i>"No matches"</i> instead, so you can tell at a glance whether the panel is empty because nothing links here or because your search is too narrow.</p>
-
-    <h2 id="gotchas">Gotchas</h2>
-    <ul>
-      <li><b>The panel only knows about the graph, not the disk.</b> A link that hasn't been saved yet — still sitting in an unsaved editor buffer — isn't indexed, so it won't appear as a backlink anywhere until the source note is saved.</li>
-      <li><b>Same source, multiple rows.</b> If a note links to the current one through more than one typed link, it shows up once per link, not deduplicated into a single row — the mention count in the header reflects this.</li>
-      <li><b>Collapsed-group state doesn't persist across notes.</b> Switching to a different note resets which type groups are collapsed; it isn't remembered per-note.</li>
-    </ul>
-
     <div class="pager">
       <a class="prev" href="right-sidebar.html">
         <span class="dir">Previous</span>

@@ -97,7 +97,7 @@
 
     <div class="box">
       <span class="label">"Restore house style"</span>
-      <p>The button above the rule list clears every explicit enable/disable override in one step, so each rule falls back to the curated default — house-style rules on, everything else off. It's disabled when you're already at house style (no overrides to clear), and it doesn't ask for confirmation — there's nothing destructive about it, since your notes aren't touched until you next run Format. One thing it deliberately leaves alone: per-rule <em>configuration</em>. If you'd changed a rule's own setting — for instance, how many consecutive blank lines to allow — that value survives a restore. The button resets <em>which</em> rules run, not how the ones you've tuned are configured.</p>
+      <p>The button above the rule list clears every override in one step — both your enable/disable toggles and any per-rule <em>configuration</em> you've tuned — so each rule falls back to the shipped default: house-style rules on, everything else off, and each running with its own default settings. If you'd changed a rule's own setting — for instance, how many consecutive blank lines to allow — that value resets too. It's disabled when you're already at house style (nothing to clear), and it doesn't ask for confirmation: there's nothing destructive about it, since your notes aren't touched until you next run Format.</p>
     </div>
 
     <h2 id="categories">Rule categories</h2>
@@ -136,14 +136,25 @@
       <div class="d">The Formatter tab: the intro paragraph explaining house style, a "Restore house style" button (dimmed, at house style) with its hint text, then the six category headings — YAML frontmatter, Headings, Content, Footnotes, Spacing, Minerva-specific — each expanded into a checklist of rule rows, a checkbox plus title plus description per row, with a mix of checked (house style) and unchecked (opt-in) boxes visible.</div>
     </div>
 
-    <h2 id="gotchas">Gotchas</h2>
-    <ul>
-      <li><b>Formatting is on demand, not on save.</b> There's no background pass that rewrites a note the moment you save it. Rules only run when you invoke <b>Refactor ▸ Format</b> — on the active note, or on every <code>.md</code> file under whatever you've selected in the left sidebar (multi-select with <kbd>⌘</kbd>-click, <kbd>⇧</kbd>-click, or <kbd>⌘</kbd><kbd>A</kbd>). Toggling a rule in Settings changes nothing about notes already on disk; it only changes what happens the <em>next</em> time you run Format.</li>
-      <li><b>Nothing is retroactive.</b> Following on from the above: a note you formatted last week under an old rule set stays exactly as it was written. There's no "re-format everything" prompt triggered by a settings change — if you want the new rule set applied project-wide, select the whole tree in the sidebar and run Format yourself.</li>
-      <li><b>It's global, not per-note.</b> There's no frontmatter flag or per-file switch to exempt a single note from formatting — the rule set in this tab applies uniformly to whatever you run Format over. If a note needs different handling, leave it out of your sidebar selection when you invoke the command.</li>
-      <li><b>Ignore the tab list's "On-save rules" subtitle.</b> The Settings sidebar's own tab listing labels this section "On-save rules" — that's a holdover from an earlier design and doesn't match current behavior. Nothing runs on save; go by the on-demand behavior described above.</li>
-      <li><b>Restoring house style doesn't touch per-rule configuration.</b> Clearing your on/off overrides is not the same as clearing everything — a tuned value like a custom blank-line maximum persists across a restore. Only the enabled/disabled state resets.</li>
-    </ul>
+    <h2 id="exempt">Exempting a single note</h2>
+    <p>The rules in this tab are global: they apply uniformly to whatever you run Format over. When one note needs to sit out — a verbatim quote, a file you hand-format, a scratch pad you'd rather leave ragged — you don't have to remember to drop it from your sidebar selection every time. Give it a <code>format: false</code> property in its frontmatter and Format skips the whole note; the rest of the run is unaffected.</p>
+
+    <p>The value has to be a real YAML <em>boolean</em>, not the word in quotes. Only <code>format: false</code> opts out — <code>format: true</code>, a missing key, and the <em>string</em> <code>"false"</code> all format as normal. That distinction matters mostly because of <em>how</em> you set the property:</p>
+
+    <div class="deflist">
+      <div class="row">
+        <div class="k">In the frontmatter</div>
+        <div class="v">Type <code>format: false</code> directly into the note's YAML block. Unquoted, that's a boolean — done.</div>
+      </div>
+      <div class="row">
+        <div class="k">Add Property…</div>
+        <div class="v">From the editor or file-tree right-click menu, choose <b>Add Property…</b>, name it <code>format</code>, and set the <b>Type</b> to <b>boolean</b> — the value control becomes a toggle that defaults to <em>false</em>. Leaving the string type here would write <code>"false"</code>, which does <em>not</em> opt out, so the type picker is the part that matters.</div>
+      </div>
+      <div class="row">
+        <div class="k">Properties panel</div>
+        <div class="v">In the right sidebar's <b>Properties</b> panel, add <code>format</code>, then click its type icon and switch it to <b>boolean</b>; toggle the value off. Same result, without leaving the panel.</div>
+      </div>
+    </div>
 
     <div class="pager">
       <a class="prev" href="settings-notes.html">

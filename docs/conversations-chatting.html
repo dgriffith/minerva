@@ -159,13 +159,6 @@
       <div class="d">The conversations panel with the tab list on the left; the context rail showing "From: research/thesis.md" and a model picker; a streaming assistant message with the thinking-dots indicator still visible beneath the partial markdown text; and, on the completed message above it, a numbered footnote citation with title, host, and a "cite" action.</div>
     </div>
 
-    <h2 id="gotchas">Gotchas</h2>
-    <ul>
-      <li><b>The model picker and effort picker are per-conversation, not per-message.</b> Changing the model on an existing tab only affects turns from that point forward; if the conversation had a reasoning-effort override the new model doesn't support, it's silently clamped to the nearest level it does (or cleared, for a model with no effort levels at all) rather than erroring on the next send.</li>
-      <li><b>Closing a tab is one-way.</b> There's a confirm dialog, but there is no "reopen last closed conversation" — once archived, a conversation only resurfaces as an entry in whatever surface lists archived conversations, not back in the tab strip.</li>
-      <li><b>A conversation's citations are exclusively from <code>web_search</code>.</b> If the model never calls that tool during a turn, the message carries no citations at all, even if it extensively read and referenced your own notes via <code>search_notes</code>/<code>read_note</code>.</li>
-    </ul>
-
     <div class="pager">
       <a class="prev" href="conversations.html">
         <span class="dir">Previous</span>

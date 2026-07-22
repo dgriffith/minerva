@@ -144,13 +144,6 @@
       <div class="d">The AI settings panel: a "Default model" dropdown and a "Default reasoning effort" dropdown with its model-gating hint text beneath; below that the API key section showing the "✓ API key saved" status line, a masked password field with a "Clear saved key" link; and at the bottom the voice dictation checkbox with its model dropdown.</div>
     </div>
 
-    <h2 id="gotchas">Gotchas</h2>
-    <ul>
-      <li><b>Nothing here saves until you click Done.</b> The model, effort, API key entry, and pending clear are all held in the dialog's local state and only written together when you close the dialog with Done — clicking Cancel, or closing the window, discards all of it, including a pending key clear.</li>
-      <li><b>Changing the model or clearing the key doesn't touch conversations already open.</b> Each conversation tab tracks its own model (defaulting from this setting only when it was created), so switching the default here has no retroactive effect on an in-progress tab. Clearing the API key here and clicking Done will, however, make the very next message you send in <i>any</i> conversation fail — there's no separate per-conversation key.</li>
-      <li><b>"API key saved" is a presence check, not a working-key check.</b> An expired, revoked, or mistyped key still shows <b>✓ API key saved</b> — the status only reflects that something is stored, not that Anthropic will accept it. A bad key surfaces as a failed request the next time you actually send a message.</li>
-    </ul>
-
     <div class="pager">
       <a class="prev" href="settings-compute.html">
         <span class="dir">Previous</span>

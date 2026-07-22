@@ -120,12 +120,6 @@
       <p>Suppressed dialogs are stored in <code>localStorage</code> as a flat set of keys, with no reference back to the registry. If a build removes or renames a confirmation, a key you suppressed in an older version can outlive the dialog it belonged to. Rather than silently drop that key — which would make it impossible to ever undo — the Behaviors tab diffs the stored set against the current registry and lists anything it doesn't recognize under its own "Unknown confirmation" rows, showing the raw key instead of a friendly title. Unchecking one of those is the only way to clear it; there's no bulk "clean up" action.</p>
     </div>
 
-    <h2 id="gotchas">Gotchas</h2>
-    <ul>
-      <li><b>A few dialogs hide the checkbox entirely.</b> The first-run Python trust prompt and the "no API key configured" prompt both omit "Don't ask again" on purpose — Python trust is scoped per-project (recorded in <code>.minerva/config.json</code>, not per-machine localStorage), and the missing-key prompt is the thing that tells you LLM features are blocked, so silencing it would just return you to a confusing silent failure. Both still get a row here for completeness, but toggling the Python-trust row has no effect since suppression was never how that one worked.</li>
-      <li><b>Suppression is per-machine.</b> The underlying <code>localStorage</code> set doesn't travel with the project — reopening the same thoughtbase on another computer asks every dialog again until you re-suppress it there too.</li>
-    </ul>
-
     <div class="pager">
       <a class="prev" href="settings-appearance.html">
         <span class="dir">Previous</span>

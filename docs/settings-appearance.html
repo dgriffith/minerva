@@ -133,13 +133,6 @@
       <div class="d">The Settings dialog's Appearance tab, showing the "Theme" dropdown at top and the "Content font" dropdown below it with its options open (Minerva default, System Sans, Serif, Monospace, JetBrains Mono, Berkeley Mono, System mono), each hint line visible beneath its field.</div>
     </div>
 
-    <h2 id="gotchas">Gotchas</h2>
-    <ul>
-      <li><b>The named mono presets don't install fonts.</b> Picking "JetBrains Mono" or "Berkeley Mono" only sets a font-family preference — if that face isn't already installed on your system, the browser falls through to the next name in the stack (ultimately Menlo/SFMono-Regular), so the note pane will silently keep looking like the fallback rather than the one you chose.</li>
-      <li><b>Chrome is never affected.</b> If you're expecting a "reading font" that also restyles the sidebar or menus, that's not what this control does — it's scoped to <code>--content-font-family</code>, which only the editor content and preview read. The rest of the UI always uses the system font.</li>
-      <li><b>Per-machine, not per-project.</b> Like theme, the content font is stored in <code>localStorage</code> — it's a preference for this install of Minerva, not something that travels with the notebase or syncs to another device.</li>
-    </ul>
-
     <div class="pager">
       <a class="prev" href="settings-editor.html">
         <span class="dir">Previous</span>

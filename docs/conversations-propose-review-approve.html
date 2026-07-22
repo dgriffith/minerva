@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Minerva — Docs — The Propose, Review, Approve Loop</title>
-<meta name="description" content="Why every AI-originated graph write in Minerva files as a reviewable thought:Proposal instead of landing directly — the Trust Principle, the three approval tiers, and the diff view you check before you approve." />
+<meta name="description" content="Why every AI-originated graph write in Minerva files as a reviewable thought:Proposal instead of landing directly — the Trust Principle, the single proposal path every write takes, and the diff view you check before you approve." />
 <link rel="stylesheet" href="../minerva.css" />
 <link rel="stylesheet" href="docs.css" />
 </head>
@@ -89,27 +89,12 @@
     <h2 id="why">Why proposals exist</h2>
     <p>An LLM is a source of claims about your notes, not an editor with commit rights. Treating its output as evidence means every graph mutation it wants to make is a <i>suggestion</i> until you look at it — so wrong claims, bad links, and hallucinated components stay quarantined as pending records instead of silently becoming part of what you know. The mechanism for that quarantine is a node type: <code>thought:Proposal</code>, with a <code>thought:proposalStatus</code> of <code>thought:pending</code>, <code>thought:approved</code>, <code>thought:rejected</code>, or <code>thought:expired</code>.</p>
 
-    <p>Internally, every LLM apply path funnels through one function, <code>proposeWrite()</code>, which takes an <code>operationType</code> (what kind of change this is) and a bundle of <code>payloads</code> (what it would actually write). What happens next depends entirely on that operation's approval tier.</p>
+    <p>Internally, every LLM apply path funnels through one function, <code>proposeWrite()</code>, which takes an <code>operationType</code> (what kind of change this is) and a bundle of <code>payloads</code> (what it would actually write). It always does the same thing: file a pending <code>thought:Proposal</code> and stop. Nothing lands until you approve it.</p>
 
-    <h2 id="tiers">The three approval tiers</h2>
-    <p>Every <code>OperationType</code> the LLM can emit maps to exactly one tier in a policy table (<code>DEFAULT_POLICY</code> in <code>approval.ts</code>, lines 46–65). The tier decides whether <code>proposeWrite()</code> files a pending proposal, applies the write immediately and just logs it, or applies it with no record at all:</p>
+    <h2 id="one-proposal">Everything is a proposal</h2>
+    <p>There are no trust levels to learn — no writes that skip review. Whatever the model emits — a new claim (<code>new_claim</code>), an evidence link (<code>evidence_link</code>), a component (<code>component_creation</code>), a note move or rename (<code>note_refactor</code>), a delete (<code>note_delete</code>), an in-place rewrite (<code>note_rewrite</code>), or proposed source properties (<code>source_properties</code>) — <code>proposeWrite()</code> writes a <code>thought:Proposal</code> with status <code>pending</code> and applies nothing until you act on it. The <code>operationType</code> is just a label on the review card; it never changes whether you get to review.</p>
 
-    <div class="deflist">
-      <div class="row">
-        <div class="k"><code>requires_approval</code></div>
-        <div class="v">New claims (<code>new_claim</code>), evidence links (<code>evidence_link</code>), component creation (<code>component_creation</code>), note moves/renames (<code>note_refactor</code>), note deletes (<code>note_delete</code>), in-place note rewrites (<code>note_rewrite</code>), and proposed source properties (<code>source_properties</code>). <code>proposeWrite()</code> writes a <code>thought:Proposal</code> with status <code>pending</code> and stops there — nothing is applied until you act on it.</div>
-      </div>
-      <div class="row">
-        <div class="k"><code>notify_only</code></div>
-        <div class="v">Confidence updates (<code>confidence_update</code>) and status changes (<code>status_change</code>). The bundle is applied immediately via <code>applyBundle()</code>, but a <code>thought:Proposal</code> is still written — filed straight in as <code>approved</code> — so the change leaves an audit trail even though nobody reviewed it beforehand.</div>
-      </div>
-      <div class="row">
-        <div class="k"><code>autonomous</code></div>
-        <div class="v">Tag additions (<code>tag_addition</code>) and staleness flags (<code>staleness_flag</code>). Applied immediately with no proposal node written at all — <code>proposeWrite()</code> returns <code>null</code>. Low-stakes enough that even an audit-trail entry isn't worth it.</div>
-      </div>
-    </div>
-
-    <p>One override cuts across all three. Before dispatching on tier, <code>proposeWrite()</code> checks whether any node the bundle touches (<code>affectsNodeUris</code>) already carries <code>thought:hasStatus thought:established</code> — a SPARQL <code>ASK</code>-style lookup (<code>anyNodeEstablished()</code>, <code>approval.ts</code> lines 91–101). If so, the tier is forced up to <code>requires_approval</code> regardless of what the operation type's own policy says. A <code>tag_addition</code> against an ordinary note applies silently; the same <code>tag_addition</code> against a note you've marked established gets queued for your review instead. Once you've vetted something, the model can't quietly touch it again without asking.</p>
+    <p>This holds even for changes that feel automatic. Auto-tagging a note, for example, still files an ordinary <code>note_rewrite</code> proposal — it simply self-approves it the moment you accept the suggested tags on the conversation card, so the write lands with a real <code>approved</code> proposal behind it rather than slipping in unrecorded. Every graph write the LLM makes has a proposal you can find in the <a href="right-sidebar-proposals.html">Proposals</a> panel.</p>
 
     <h2 id="diff">The diff view</h2>
     <p>A pending proposal isn't a one-line description you have to trust — it's the literal payload bundle waiting to be applied, and reviewing it means reading that payload directly. Each payload in the bundle carries enough to reconstruct exactly what will land:</p>
@@ -135,15 +120,8 @@
     <h2 id="expiry">Auto-expiry</h2>
     <p>Every proposal is stamped with an <code>autoExpires</code> timestamp at creation — seven days out by default (<code>write.expiryDays ?? 7</code>), configurable per write. There is a real function that enforces it, <code>expireProposals()</code>, which walks every still-<code>pending</code> proposal past its <code>autoExpires</code> date and flips it to <code>expired</code>.</p>
 
-    <p>What doesn't exist is anything that calls that function on a schedule. <code>expireProposals()</code> is wired to a single IPC channel, <code>proposal:expire</code>, exposed on <code>window.api</code> as <code>api.proposals.expire()</code> — but nothing in the renderer currently invokes it, and there's no timer in main running it in the background. In practice a proposal past its expiry window doesn't flip itself to <code>expired</code>; it just keeps showing as <b>Pending</b> until something calls that IPC method, which nothing currently does. Treat <code>autoExpires</code> as a recorded intent rather than a guarantee — <a href="right-sidebar-proposals.html">Proposals</a> covers this same finding from the panel's side, in its Gotchas section.</p>
+    <p>What doesn't exist is anything that calls that function on a schedule. <code>expireProposals()</code> is wired to a single IPC channel, <code>proposal:expire</code>, exposed on <code>window.api</code> as <code>api.proposals.expire()</code> — but nothing in the renderer currently invokes it, and there's no timer in main running it in the background. In practice a proposal past its expiry window doesn't flip itself to <code>expired</code>; it just keeps showing as <b>Pending</b> until something calls that IPC method, which nothing currently does. Treat <code>autoExpires</code> as a recorded intent rather than a guarantee — <a href="right-sidebar-proposals.html">Proposals</a> covers this same finding from the panel's side.</p>
 
-    <h2 id="gotchas">Gotchas</h2>
-    <ul>
-      <li><b>"Applied immediately" still isn't invisible.</b> <code>notify_only</code> operations write to the graph before you ever see them, but they still leave an <code>approved</code> proposal behind — check the Approved tab in the Proposals panel if you want to know what an autonomous-feeling AI action actually did.</li>
-      <li><b><code>autonomous</code> operations leave nothing to audit through proposals.</b> Tag additions and staleness flags never create a <code>thought:Proposal</code> at all. If you want a record of every graph write regardless of tier, the <a href="right-sidebar-proposals.html">Proposals</a> panel won't show these — you'd need to look at the graph directly.</li>
-      <li><b>Escalation is per-write, not per-conversation.</b> The established-node check runs against the specific <code>affectsNodeUris</code> a given bundle touches, computed fresh on every <code>proposeWrite()</code> call — there's no session-level flag that makes an entire conversation more cautious once it brushes an established node once.</li>
-      <li><b>Approving a bundle with zero payloads throws rather than silently succeeding.</b> That's a deliberate refusal in <code>approveProposal()</code> — an empty bundle means something upstream filed the proposal incorrectly, and the engine surfaces that as a bug instead of a no-op approval.</li>
-    </ul>
 
     <div class="pager">
       <a class="prev" href="conversations-drafts.html">

@@ -127,14 +127,6 @@
       <p>Minerva binds <kbd>⌘</kbd><kbd>P</kbd> to <a href="navigation-quick-switch.html">Quick switch</a> rather than a preview toggle, unlike some other markdown editors — so the cycle shortcut adds <kbd>⇧</kbd> instead. See <a href="navigation-command-palette.html">Command palette</a> for the related <kbd>⌘</kbd><kbd>K</kbd> binding.</p>
     </div>
 
-    <h2 id="gotchas">Gotchas</h2>
-    <ul>
-      <li><b>No scroll sync in Side by side.</b> The source and preview panes scroll independently — scrolling one does not move the other. Each pane just remembers its own scroll position for restoring the note later (<code>src/renderer/lib/components/Editor.svelte:932-933</code>); they aren't linked to each other.</li>
-      <li><b>Cursor and scroll position survive a mode switch.</b> Toggling between Source, Preview, and Side by side doesn't remount the editor — it's only swapping which pane(s) are visible around it — so your cursor offset and scroll position in the source editor are exactly where you left them when you switch back to Source.</li>
-      <li><b>The mode belongs to the pane, not the note.</b> Split your window into two panes, put one in Preview and one in Source, and that assignment sticks per pane even as you switch which note is open in it.</li>
-      <li><b>Plain-text files have no toggle.</b> A file that Minerva treats as plain text (not markdown) has nothing to render, so the Source/Side by side/Preview toolbar doesn't appear for it at all — you're always in Source for those.</li>
-    </ul>
-
     <div class="pager">
       <a class="prev" href="viewing-options.html">
         <span class="dir">Previous</span>

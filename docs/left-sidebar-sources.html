@@ -182,15 +182,6 @@
     <h2 id="citations">Sources, notes, and citations</h2>
     <p>A source is cited from a note using the typed wiki-link syntax, not through any UI in this panel: <code>[[cite::sourceId]]</code> points at a source as a bibliography-style reference, and <code>[[quote::excerptId]]</code> points at a specific excerpt for a direct quotation. Both are indexed into the graph the same way any typed link is, which is what powers the "Referenced from" list on the detail view above. See <a href="notes-links.html">Notes → Links</a> for the full typed-link mechanics and how targets resolve — this page covers the panel you browse and capture sources from, not the citation syntax itself.</p>
 
-    <h2 id="gotchas">Gotchas</h2>
-    <ul>
-      <li><b>No favicon, no domain, no browser-bookmark styling.</b> The row and header UI are built around bibliographic fields (creators, year, publisher, DOI) — if what you want is a lightweight bookmark list, see <a href="left-sidebar-bookmarks.html">Bookmarks</a> instead.</li>
-      <li><b>Renaming a source only changes its title, not its id.</b> <code>Rename source</code> upserts <code>dc:title</code> in <code>meta.ttl</code>; the on-disk directory and the id any citations resolve against stay exactly as they were.</li>
-      <li><b>Encrypted PDFs are rejected outright</b> during ingest, with a clean error rather than a partial/garbled capture.</li>
-      <li><b>Scanned PDFs need an OCR step before they have a body.</b> A PDF with no text layer ingests immediately (metadata and <code>original.pdf</code> are saved), but <code>body.md</code> stays empty until you run — or explicitly skip — the OCR pass Minerva offers.</li>
-      <li><b>Merging two sources is manual and irreversible on the losing side.</b> The merge picker warns that excerpts and citations of the source being merged away move to the target, then the original is removed.</li>
-    </ul>
-
     <div class="pager">
       <a class="prev" href="left-sidebar-notes-tree.html">
         <span class="dir">Previous</span>

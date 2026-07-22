@@ -146,15 +146,6 @@ Feynman on how rubber bands work
     <h2 id="export">On export</h2>
     <p>The interactive card is meaningless in an exported file, so when you publish or export a note each <code>youtube</code> fence degrades to a linked thumbnail — the poster image wrapped in a link to the video, <code>[![caption](thumbnail)](watch-url)</code> in markdown terms. A reader of the exported artifact still sees the poster and can click through to watch.</p>
 
-    <h2 id="gotchas">Gotchas</h2>
-    <ul>
-      <li><b>Paste a full URL, scheme and all.</b> A bare video id or a schemeless <code>youtube.com/watch?v=…</code> doesn't parse — the fence renders an "Unrecognized YouTube URL" error in its place. Copy the complete <code>https://</code> URL from the browser or the Share button. The error is inline and harmless; fix the URL and the card appears.</li>
-      <li><b>One video per fence.</b> Only the first non-empty line is read as the URL. A second URL on a later line isn't a second embed — it's caption text.</li>
-      <li><b>Videos only, not playlists or channels.</b> Playlist, channel, and <code>@handle</code> URLs don't resolve. A watch URL that carries a <code>&amp;list=</code> parameter embeds fine, but the playlist context is dropped — the card links to that single video.</li>
-      <li><b>No title lookup.</b> Fetching the real title would mean calling YouTube every time the note renders, which Minerva won't do. The card shows your caption or the generic "Watch on YouTube" — write a caption if the note should read well.</li>
-      <li><b>Offline, the thumbnail is blank.</b> The poster image comes from <code>img.youtube.com</code> when the note is viewed. Without a network the card still renders — caption, play button, working link — just without the picture, and the image fills in next time you view the note online.</li>
-    </ul>
-
     <div class="pager">
       <a class="prev" href="notes-images.html">
         <span class="dir">Previous</span>

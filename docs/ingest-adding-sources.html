@@ -138,13 +138,6 @@
       <p>Every source is stored under an id derived from its most stable identifier — DOI, arXiv id, PubMed id, ISBN, or (falling back) a hash of its URL or content. Ingesting the same paper twice by the same route produces the same id, so a duplicate is just a no-op. See <a href="ingest-citing-duplicates.html">Citing &amp; duplicates</a> for what happens when the <i>same</i> paper arrives via <i>different</i> identifiers.</p>
     </div>
 
-    <h2 id="gotchas">Gotchas</h2>
-    <ul>
-      <li><b>The menu's "Ingest URL" and "Ingest Identifier" don't smart-route — the Sources panel's + button does.</b> Paste a DOI into the URL prompt and it fails; paste it into the + button and it works. If you're not sure which kind of thing you're holding, use the + button.</li>
-      <li><b>PDF ingest doesn't key off a DOI even when one's findable.</b> A PDF's source id is always a content hash, not a DOI extracted from the file — see <a href="ingest-pdf.html">PDF ingest</a> for why, and <a href="ingest-citing-duplicates.html">Citing &amp; duplicates</a> for the merge step this can require.</li>
-      <li><b>Bulk imports report failures inline, not silently.</b> A BibTeX or Zotero RDF import that partially fails still completes the entries it can, then shows you the first few failures with a reason — check the summary rather than assuming a clean run.</li>
-    </ul>
-
     <div class="pager">
       <a class="prev" href="ingest.html">
         <span class="dir">Previous</span>

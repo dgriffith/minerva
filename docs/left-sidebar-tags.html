@@ -140,14 +140,6 @@
       <p>Selecting a tag doesn't change what's visible in the <a href="left-sidebar-notes-tree.html">Notes tree</a> panel — the two are independent. It produces its own flat list of matching titles inside the Tags panel itself; switch to the Notes tab and the full, unfiltered tree is exactly as you left it.</p>
     </div>
 
-    <h2 id="gotchas">Gotchas</h2>
-    <ul>
-      <li><b>No tag hierarchy in this panel.</b> The <code>/</code> in a tag like <code>project/ui</code> is valid syntax and is stored and matched as a literal tag string — but this panel shows it as one flat chip alongside every other tag, not as a nested tree with parent/child rollup. (A nested-tag tree does exist elsewhere, in the right sidebar's Properties-adjacent tags view — a different panel from the one described on this page.)</li>
-      <li><b>Selecting a tag is an exact match, not a prefix match.</b> Selecting <code>project</code> shows only notes tagged exactly <code>#project</code> — notes tagged only <code>#project/ui</code> won't appear in its results.</li>
-      <li><b>Empty project shows a hint, not a blank pane.</b> With no tags indexed anywhere, the panel reads "No tags yet" instead of an empty grid.</li>
-      <li><b>The panel doesn't add or remove tags.</b> To tag a note, edit its frontmatter or type <code>#tag</code> in the body (or use the Properties panel's tag chips in the right sidebar); the Tags panel only ever reads what's already indexed.</li>
-    </ul>
-
     <div class="pager">
       <a class="prev" href="left-sidebar-sources.html">
         <span class="dir">Previous</span>

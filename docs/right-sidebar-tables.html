@@ -90,11 +90,6 @@
     <h1>Tables</h1>
     <p class="lede">The right sidebar's Tables panel is not a markdown-table browser. It scans the current note's <code>```sql</code> fences for table references and shows you, per note, which of those names are actually registered — the same registration the <a href="left-sidebar-tables.html">left sidebar's Tables panel</a> maintains for every <code>.csv</code> file in the project. Click a row to open a <code>SELECT *</code> against it in a new query tab.</p>
 
-    <div class="box">
-      <span class="label">Not the CSVW panel it sounds like</span>
-      <p>It would be reasonable to guess that a right-sidebar, per-note "Tables" panel lists the <a href="notes-tables.html">markdown tables</a> in the current note — the ones extracted into the graph as CSVW. It doesn't. This panel is part of the SQL/DuckDB pipeline: it reads SQL fences, not pipe tables, and its rows link to registered <code>.csv</code> files, not to CSVW <code>csvw:Table</code> nodes in the graph. If you want to see a note's markdown tables, look at the note itself in preview; if you want their extracted triples, use Graph &gt; Query. See <a href="notes-tables.html#gotchas">the Tables &amp; CSV gotchas</a> for the graph side, and <a href="left-sidebar-tables.html">Left sidebar — Tables</a> for the project-wide version of this same DuckDB registry.</p>
-    </div>
-
     <h2 id="contents">What's in the list</h2>
     <p>The panel scans the current note's source for fenced blocks marked <code>```sql</code> (or a query-directive fence carrying <code>language: sql</code> metadata) and pulls out every name that follows a <code>FROM</code>, <code>JOIN</code>, or <code>INTO</code> keyword. Each distinct name becomes one row, sorted alphabetically. This is a lightweight scan, not a SQL parser — it's tuned for the common shapes and can over-report on more complex queries (CTEs with aliases, derived tables), which is why the next check matters.</p>
 
