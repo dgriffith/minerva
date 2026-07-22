@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Minerva — Docs — Charts</title>
-<meta name="description" content="Add live, interactive charts to your notes — draw them from a chart type in the menu, or feed them live data from a query, a table, or a compute cell." />
+<title>Minerva — Docs — Flashcards</title>
+<meta name="description" content="Turn any note into two-sided flashcards for study — write a front and a back, and reveal the answer with a click." />
 <link rel="stylesheet" href="../minerva.css" />
 <link rel="stylesheet" href="docs.css" />
 </head>
@@ -54,10 +54,10 @@
     <a href="notes.html">Notes</a>
     <a href="notes-links.html" class="sub">Links</a>
     <a href="notes-callouts.html" class="sub">Callouts</a>
-    <a href="notes-flashcards.html" class="sub">Flashcards</a>
+    <a href="notes-flashcards.html" class="sub active">Flashcards</a>
     <a href="notes-math.html" class="sub">Math</a>
     <a href="notes-diagrams.html" class="sub">Diagrams</a>
-    <a href="notes-charts.html" class="sub active">Charts</a>
+    <a href="notes-charts.html" class="sub">Charts</a>
     <a href="notes-code.html" class="sub">Code &amp; compute cells</a>
     <a href="notes-tables.html" class="sub">Tables &amp; CSV</a>
     <a href="notes-images.html" class="sub">Images</a>
@@ -88,75 +88,47 @@
 
   <!-- ===== Content ===== -->
   <main class="docs-content">
-    <p class="crumbs"><a href="index.html">Docs</a><span class="sep">/</span><a href="notes.html">Notes</a><span class="sep">/</span>Charts</p>
+    <p class="crumbs"><a href="index.html">Docs</a><span class="sep">/</span><a href="notes.html">Notes</a><span class="sep">/</span>Flashcards</p>
 
-    <h1>Charts</h1>
-    <p class="lede">You can drop a live, interactive chart right into a note. Hover any bar or point for a tooltip, and use the chart's corner menu to save it as an image. A chart can hold its own numbers, or draw from live data elsewhere in your project — a query over your knowledge base, a table, or the output of a compute cell — so it stays up to date instead of freezing a snapshot.</p>
+    <h1>Flashcards</h1>
+    <p class="lede">A flashcard is a two-sided prompt for study, written right inside a note: a question on the front, the answer on the back. In the note the front shows on its own with a <b>Show answer</b> button, so you can test yourself before revealing the rest. You can scatter cards through your notes wherever a fact is worth remembering.</p>
 
-    <h2 id="insert">Adding a chart</h2>
-    <p>The quickest way is to right-click in the editor and choose <b>Elements → Chart…</b>. Pick a shape — Bar, Line, Area, Scatter, Time Series, or Pie — and Minerva drops in a ready-made chart with sample numbers already in place, with your cursor sitting in the data so your first edit is just swapping in your own values.</p>
+    <h2 id="writing">Writing a flashcard</h2>
+    <p>Start a quote block and make its first line <code>[!card]</code>. Put a line with three dashes — <code>---</code> — in the body: everything above it becomes the front of the card, and everything below it the back. When you're done writing, the note shows just the front with a <b>Show answer</b> button; click it to flip the card over.</p>
 
-    <p>A chart lives in a chart cell that holds a short specification describing what to draw. Here is what a simple bar chart looks like:</p>
+    <p>Any text you add after <code>[!card]</code> becomes the card's title — a handy place to name the deck a card belongs to.</p>
 
-<pre><code>```vega-lite
-{
-  "data": { "values": [
-    { "category": "A", "value": 28 },
-    { "category": "B", "value": 55 },
-    { "category": "C", "value": 43 },
-    { "category": "D", "value": 91 }
-  ] },
-  "mark": "bar",
-  "encoding": {
-    "x": { "field": "category", "type": "nominal" },
-    "y": { "field": "value", "type": "quantitative" }
-  }
-}
-```</code></pre>
+<pre><code>&gt; [!card] Biology deck
+&gt; What organelle produces most of a cell's energy?
+&gt; ---
+&gt; The mitochondrion.</code></pre>
 
-    <p>You describe the data, the shape to draw, and which values go on each axis; Minerva works out the axes, scales, and legend for you. That concise style covers ordinary bar, line, area, scatter, and pie charts. For a chart that needs finer control than the concise style allows, there is also a more detailed form where you spell out every part yourself — reach for it only when you need something the concise style can't express.</p>
-
-    <h2 id="rendering">How it looks</h2>
-    <p>The chart draws right in the note, sized to fit the column so it never spills off the side. It's fully interactive: hover a bar or point for a tooltip, and open the "⋯" menu in the corner to save the chart as an image. Colors follow your current theme automatically, so a chart looks at home whether you're in a light or dark look — though any color you set yourself is always kept.</p>
+    <p>The front and back can hold anything a note can — bold text, links, images, math, even a picture to identify. A card without a <code>---</code> divider simply shows its front with nothing to reveal, which is fine for a plain prompt or reminder.</p>
 
     <div class="shot wide">
-      <div class="icon">📊</div>
-      <div class="d">A note with a bar chart drawn inline, sized to the width of the column. A tooltip shows the value of the bar under the pointer, and the "⋯" menu for saving the chart sits in the corner.</div>
+      <div class="icon">🃏</div>
+      <div class="k">A flashcard in a note</div>
+      <div class="d">A note with a flashcard box titled "Biology deck": the front shows the question "What organelle produces most of a cell's energy?" above a "Show answer" button, with the answer hidden until you click.</div>
     </div>
 
-    <h2 id="data">Live data</h2>
-    <p>The simple approach is to list your numbers right in the chart, as above. But a chart can also pull its data from elsewhere in your project so it updates as that data changes. In place of listing values, point the chart at one of these:</p>
+    <h2 id="study">Turning cards into a study session</h2>
+    <p>Flashcards you write this way aren't just for reading in place — you can gather them up and review them as a deck, or send them out to study elsewhere. See <a href="export-flashcards.html">Flashcards export</a> for collecting and sharing them.</p>
 
-    <div class="deflist">
-      <div class="row">
-        <div class="k">A query over your knowledge base</div>
-        <div class="v">Each result becomes a point on the chart, so the chart reflects your notes as they grow and change.</div>
-      </div>
-      <div class="row">
-        <div class="k">A table</div>
-        <div class="v">Draw straight from a table of data you've brought into your project.</div>
-      </div>
-      <div class="row">
-        <div class="k">A compute cell's output</div>
-        <div class="v">Chart the results of a compute cell elsewhere in the note. Run that cell at least once first, so there's an output to draw from.</div>
-      </div>
-    </div>
-
-    <p>A chart that draws from live data gets a refresh button, so after the underlying data changes you can redraw it in place without touching the note.</p>
-
-    <div class="box">
-      <span class="label">Data stays in your project</span>
-      <p>A chart draws only from numbers in the note or from data already in your project — it won't reach out to the web to fetch anything. This keeps notes that arrive from an import or from someone else safe to open and view.</p>
-    </div>
+    <h2 id="good-to-know">Good to know</h2>
+    <ul>
+      <li><b>A card is a kind of callout.</b> It's written like the titled boxes on the <a href="notes-callouts.html">Callouts</a> page, just with the special <code>card</code> label and a front/back divider.</li>
+      <li><b>One divider per card.</b> The first <code>---</code> splits front from back; keep the rest of the card to those two sides.</li>
+      <li><b>Name your decks.</b> Give related cards the same title after <code>[!card]</code> so they read as one set.</li>
+    </ul>
 
     <div class="pager">
-      <a class="prev" href="notes-diagrams.html">
+      <a class="prev" href="notes-callouts.html">
         <span class="dir">Previous</span>
-        <span class="ttl">← Diagrams</span>
+        <span class="ttl">← Callouts</span>
       </a>
-      <a class="next" href="notes-code.html">
+      <a class="next" href="notes-math.html">
         <span class="dir">Next</span>
-        <span class="ttl">Code &amp; compute cells →</span>
+        <span class="ttl">Math →</span>
       </a>
     </div>
   </main>

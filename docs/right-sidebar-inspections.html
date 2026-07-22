@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Minerva — Docs — Inspections</title>
-<meta name="description" content="The Inspections panel: project-wide epistemic health checks against the knowledge graph — implemented and running, but not currently reachable in the UI." />
+<meta name="description" content="The Inspections panel checks the reasoning across your whole project and flags weak spots — claims without support, contradictions, broken links, and messy sources." />
 <link rel="stylesheet" href="../minerva.css" />
 <link rel="stylesheet" href="docs.css" />
 </head>
@@ -88,52 +88,52 @@
     <p class="crumbs"><a href="index.html">Docs</a><span class="sep">/</span><a href="right-sidebar.html">Right sidebar</a><span class="sep">/</span>Inspections</p>
 
     <h1>Inspections</h1>
-    <p class="lede">Inspections is a battery of epistemic health checks that run against your <em>whole project's</em> knowledge graph — not just the open note — and surface structural or evidentiary problems in your claims, grounds, and warrants: unsupported claims, missing warrants, contradictions between established claims, broken links, and a handful of source-hygiene checks. Every result is a read-only flag. Nothing here writes to the graph, and nothing goes through the Proposal/approval system — it's diagnostics, not authorship.</p>
+    <p class="lede">Inspections reviews the reasoning across your entire project — not just the note you have open — and flags weak spots: claims you've asserted without support, contradictions between things you've treated as settled, broken links, and messy sources. Think of it as a proofreader for your thinking. Every result is just a flag for your attention; Inspections never changes your notes on its own.</p>
 
     <div class="box">
-      <span class="label">Not currently in the UI</span>
-      <p>This panel's tab was deliberately removed from the right sidebar before the v1.0 release — the feature wasn't ready for general use. The engine behind it keeps running: <code>health-checks.ts</code> still executes its checks on a schedule, and the panel component itself is untouched. There's no setting to bring the tab back; that only happens in a future release. This page documents the panel as it exists in the code, for whenever the tab returns.</p>
+      <span class="label">Coming in a future release</span>
+      <p>Inspections isn't available in the app yet — it's on the way. This page describes what it will do so you know what to expect when it arrives.</p>
     </div>
 
-    <h2 id="what-it-checks">What it actually checks</h2>
-    <p>The checks are a fixed, hardcoded list in <code>src/main/graph/health-checks.ts</code> — not a general query builder and not user-configurable. Each one is a SPARQL query against <code>.minerva/graph.ttl</code>, run in parallel by <code>runAllChecks()</code>:</p>
+    <h2 id="what-it-checks">What it checks</h2>
+    <p>Inspections looks for a handful of common problems in how your ideas are argued and how your sources are kept:</p>
 
     <div class="deflist">
       <div class="row">
         <div class="k">Unsupported claim</div>
-        <div class="v">A <code>thought:Claim</code> with no other node <code>thought:supports</code>-ing it — a claim asserted with no grounds behind it at all.</div>
+        <div class="v">A claim you've stated with nothing backing it up — no evidence or reasoning behind it at all.</div>
       </div>
       <div class="row">
         <div class="k">Missing warrant</div>
-        <div class="v">A claim that has <code>thought:Grounds</code> supporting it but no <code>thought:Warrant</code> connecting the grounds to the claim — evidence exists, but the reasoning link explaining why it counts is absent.</div>
+        <div class="v">A claim that has evidence behind it, but no explanation of why that evidence actually supports the claim.</div>
       </div>
       <div class="row">
         <div class="k">Missing backing</div>
-        <div class="v">A warrant with no <code>thought:Backing</code> behind it — the reasoning link exists, but nothing justifies trusting the warrant itself.</div>
+        <div class="v">A piece of reasoning that connects evidence to a claim, but with nothing to justify trusting that reasoning in the first place.</div>
       </div>
       <div class="row">
         <div class="k">Contradiction</div>
-        <div class="v">Two claims both marked <code>thought:hasStatus thought:established</code> that rebut each other — two things the graph currently treats as settled, disagreeing.</div>
+        <div class="v">Two ideas you've both treated as settled that actually disagree with each other.</div>
       </div>
       <div class="row">
         <div class="k">Source hygiene</div>
-        <div class="v">A cluster of checks unrelated to the claim/grounds/warrant structure: stale notes, malformed DOIs, sources missing metadata, aged-out stubs, sources that are cited but never actually read, duplicate sources sharing a DOI or URL, and broken wiki-links, anchors, or citation keys.</div>
+        <div class="v">Tidiness checks on your sources and links: sources missing details, duplicates, sources you cite but never read, and broken links or citations.</div>
       </div>
     </div>
 
-    <h2 id="running">How it runs</h2>
-    <p>Checks run automatically once when a project opens, and again every five minutes after that. The panel's own <b>Run</b> button forces an immediate pass rather than waiting for the next scheduled sweep. There's no write path anywhere in this code — it only reads the graph, so running an inspection can't trigger the LLM write-guard or the approval engine, because nothing is written.</p>
+    <h2 id="running">Running a check</h2>
+    <p>Inspections refreshes on its own as you work, and you can force an immediate pass with the <b>Run</b> button in the panel. It only reads your project to report what it finds — it never edits anything.</p>
 
     <div class="shot wide">
       <div class="icon">🔬</div>
       <div class="k">Screenshot — Inspections panel</div>
-      <div class="d">The right-sidebar Inspections panel showing a list of flagged results across several check types — an unsupported claim, a missing warrant, and a broken wiki-link — each with a short description and a Run button in the panel toolbar.</div>
+      <div class="d">The Inspections panel listing flagged results — an unsupported claim, a missing warrant, and a broken link — each with a short description, alongside a Run button to check again.</div>
     </div>
 
-    <h2 id="gotchas">Gotchas</h2>
+    <h2 id="gotchas">Good to know</h2>
     <ul>
-      <li><b>Clicking a result doesn't navigate.</b> Unlike Backlinks, Outline, or every other panel that jumps you to a location, clicking an inspection result opens a new conversation pre-seeded with that inspection's message — the intended next step is to discuss and resolve it with the AI, not just to look at where it is.</li>
-      <li><b>Plain prose produces nothing.</b> A note with no <code>thought:Claim</code>/<code>Grounds</code>/<code>Warrant</code> structure at all won't fail any check — it simply won't generate any rows, since none of the checks have anything to fire against.</li>
+      <li><b>Clicking a result starts a conversation.</b> Instead of jumping you to a spot in your notes, clicking a flag opens a new conversation about it, so you can talk it through with the AI and decide how to fix it.</li>
+      <li><b>Plain writing won't trip any flags.</b> Inspections looks at claims, evidence, and reasoning. A note that's just ordinary prose has nothing for it to check, so it won't turn up any results.</li>
     </ul>
 
     <div class="pager">

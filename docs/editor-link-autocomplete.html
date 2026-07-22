@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Minerva — Docs — Link Autocomplete</title>
-<meta name="description" content="How typing [[ suggests matching notes and aliases as you type, how to filter and accept an entry, and what actually happens when the typed text doesn't match anything." />
+<meta name="description" content="Typing [[ suggests matching notes as you type, so you can link to another note without remembering its exact name." />
 <link rel="stylesheet" href="../minerva.css" />
 <link rel="stylesheet" href="docs.css" />
 </head>
@@ -81,40 +81,36 @@
     <p class="crumbs"><a href="index.html">Docs</a><span class="sep">/</span><a href="editor.html">Editor</a><span class="sep">/</span>Link autocomplete</p>
 
     <h1>Link autocomplete</h1>
-    <p class="lede">Typing <code>[[</code> opens a suggestion list of notes and aliases, filtered as you keep typing. It saves you from remembering exact filenames — and from a typo quietly producing a link to nowhere. This page covers the trigger, the filtering, and — verified directly against the completion source, not assumed — exactly what happens when nothing matches.</p>
+    <p class="lede">To link one note to another, type <code>[[</code> and a suggestion list appears. Keep typing to narrow it down, then pick the note you want. You never have to remember a note's exact name, and you won't accidentally create a link that points nowhere.</p>
 
-    <h2 id="trigger">Triggering the list</h2>
-    <p>The popup isn't tied to the single act of typing <code>[[</code> — it re-evaluates on every keystroke while your cursor sits inside an unclosed pair. Start a link, and the list stays open and refiltering as you type, narrows and reorders as you add characters, and disappears once you type the closing <code>]]</code> or leave the link.</p>
+    <h2 id="trigger">How it works</h2>
+    <p>Type <code>[[</code> anywhere in a note and the suggestion list opens. As you keep typing, it filters live to the notes that match. Choose one and Minerva drops its name into your link.</p>
 
     <div class="deflist">
       <div class="row">
-        <div class="k">Trigger</div>
-        <div class="v">Typing <code>[[</code> anywhere in a note opens the list. It stays live on every subsequent keystroke as long as the cursor is inside an open pair — there's no separate "re-trigger" gesture, it's continuous.</div>
+        <div class="k">Open</div>
+        <div class="v">Type <code>[[</code> to open the list. It stays open and keeps filtering as you type, and closes when you finish the link with <code>]]</code> or move away.</div>
       </div>
       <div class="row">
         <div class="k">Filter</div>
-        <div class="v">Whatever you type after <code>[[</code> narrows the list. Filtering is CodeMirror's built-in fuzzy matcher — a subsequence match, case-insensitive — not a Minerva-specific search, so out-of-order characters can still match (e.g. <code>mtg</code> can match <code>Meeting Notes</code>).</div>
+        <div class="v">Whatever you type after <code>[[</code> narrows the list. Matching is forgiving — the letters just have to appear in order, so <code>mtg</code> still finds <code>Meeting Notes</code>.</div>
       </div>
       <div class="row">
-        <div class="k">Select</div>
-        <div class="v">Arrow keys move through the list; clicking an entry also works. <kbd>Esc</kbd> dismisses the popup without changing anything you've typed.</div>
-      </div>
-      <div class="row">
-        <div class="k">Accept</div>
-        <div class="v"><kbd>Tab</kbd> or <kbd>Enter</kbd> accepts the highlighted entry, inserting its title or alias in place of what you'd typed so far. Accepting never inserts brackets — you already typed <code>[[</code>, and Minerva doesn't auto-close <code>]]</code> for you.</div>
+        <div class="k">Move and pick</div>
+        <div class="v">Use the arrow keys or click to move through the list. <kbd>Tab</kbd> or <kbd>Enter</kbd> accepts the highlighted note; <kbd>Esc</kbd> closes the list and leaves your text as-is.</div>
       </div>
       <div class="row">
         <div class="k">No match</div>
-        <div class="v">If nothing in your notes matches, the list shows no items — there's no "Create new note" entry.</div>
+        <div class="v">If nothing matches, the list is empty. Minerva won't invent a note for you.</div>
       </div>
     </div>
 
-    <p>The list draws from two sources at once: every note's path (title, effectively) and any <code>aliases:</code> frontmatter entries across the project, so an alias you've defined is just as reachable as the note's real filename. A note path ranks slightly above a matching alias when both match the same typed text, so the canonical name wins ties. Typing <code>type::</code> first (e.g. <code>supports::</code>) also offers the twelve <a href="notes-links.html#types">link types</a> as completions before you get to the target text, and <code>cite::</code> switches the whole list over to your indexed sources instead of notes.</p>
+    <p>The list includes every note by name, plus any alternate names you've given a note in its properties — so a nickname is just as easy to link to as the real title. You can also link by relationship: start with a relationship word (for example <code>supports::</code>) to choose one of the built-in <a href="notes-links.html#types">link types</a>, or begin with <code>cite::</code> to point the list at your sources instead of your notes.</p>
 
     <div class="shot wide">
       <div class="icon">🔎</div>
-      <div class="k">Screenshot — Link autocomplete open</div>
-      <div class="d">The editor mid-line with an unclosed [[Mee typed, a completion popup open beneath the cursor listing filtered matches such as "Meeting Notes" and "Meeting Prep", one entry highlighted, with a note-path icon beside each.</div>
+      <div class="k">The suggestion list open</div>
+      <div class="d">Partway through typing a link, a list appears just below the cursor showing the notes that match — such as "Meeting Notes" and "Meeting Prep" — with one highlighted, ready to pick.</div>
     </div>
 
     <div class="pager">
