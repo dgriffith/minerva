@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Minerva — Docs — Diagrams</title>
-<meta name="description" content="Draw live diagrams inside a note — flowcharts, sequence diagrams, and more — by writing them in a simple text syntax." />
+<title>Minerva — Docs — Search Cells</title>
+<meta name="description" content="Drop a live list of related notes into a note — found by meaning or by keyword — that keeps itself up to date as you write." />
 <link rel="stylesheet" href="../minerva.css" />
 <link rel="stylesheet" href="docs.css" />
 </head>
@@ -56,11 +56,11 @@
     <a href="notes-callouts.html" class="sub">Callouts</a>
     <a href="notes-flashcards.html" class="sub">Flashcards</a>
     <a href="notes-math.html" class="sub">Math</a>
-    <a href="notes-diagrams.html" class="sub active">Diagrams</a>
+    <a href="notes-diagrams.html" class="sub">Diagrams</a>
     <a href="notes-charts.html" class="sub">Charts</a>
     <a href="notes-code.html" class="sub">Code &amp; compute cells</a>
     <a href="notes-query.html" class="sub">Query cells</a>
-    <a href="notes-search.html" class="sub">Search cells</a>
+    <a href="notes-search.html" class="sub active">Search cells</a>
     <a href="notes-tables.html" class="sub">Tables &amp; CSV</a>
     <a href="notes-images.html" class="sub">Images</a>
     <a href="notes-media.html" class="sub">Media</a>
@@ -90,67 +90,66 @@
 
   <!-- ===== Content ===== -->
   <main class="docs-content">
-    <p class="crumbs"><a href="index.html">Docs</a><span class="sep">/</span><a href="notes.html">Notes</a><span class="sep">/</span>Diagrams</p>
+    <p class="crumbs"><a href="index.html">Docs</a><span class="sep">/</span><a href="notes.html">Notes</a><span class="sep">/</span>Search cells</p>
 
-    <h1>Diagrams</h1>
-    <p class="lede">You can draw diagrams right inside a note — flowcharts, sequence diagrams, and more — by describing them in a simple text syntax. When you preview the note, your description turns into a clean, finished diagram, so you never have to fiddle with boxes and arrows by hand.</p>
+    <h1>Search cells</h1>
+    <p class="lede">A search cell drops a live list of related notes right into your writing — a ready-made "See also", or a running roundup of everything you've touched on a topic. You can find notes two ways: by <b>meaning</b>, which catches notes that are about the same thing even when they use different words, or by <b>keyword</b>, which finds the exact words you name. Like query cells, a search cell only reads, and refreshes on its own as your notes grow.</p>
 
-    <h2 id="syntax">Writing a diagram</h2>
-    <p>Add a cell labelled <code>mermaid</code> and describe the diagram inside it. Each line names a step and how it connects to the next. To drop one in quickly, right-click in the editor and choose <b>Elements → Mermaid Diagram</b>; you'll get an empty cell with your cursor ready inside.</p>
+    <h2 id="by-meaning">Search by meaning</h2>
+    <p>Open a cell with <code>:::query-semantic</code>, write a sentence or a few words describing what you're after, and close it with <code>:::</code>. Minerva lists the notes closest in meaning, each with a short snippet and a link. Leave the cell empty and it instead lists notes related to the one you're currently in.</p>
 
-<pre><code>```mermaid
-flowchart LR
-  A[Draft] --> B{Reviewed?}
-  B -- yes --> C[Published]
-  B -- no --> A
-```</code></pre>
+<pre><code>:::query-semantic
+how attention shapes what we remember
+:::</code></pre>
 
-    <h2 id="types">Kinds of diagrams</h2>
-    <p>Many diagram styles are supported — flowcharts, sequence diagrams, class and state diagrams, entity relationships, timelines, and more. Two of the most useful:</p>
+    <h2 id="by-keyword">Search by keyword</h2>
+    <p>Open a cell with <code>:::query-search</code> and put your words inside. Minerva lists the notes that contain them, best matches first — the same kind of search as the app's find box, embedded in your note and always current.</p>
+
+<pre><code>:::query-search
+working memory
+:::</code></pre>
+
+    <h2 id="options">Adding options</h2>
+    <p>As with query cells, put a few settings at the top, one per line, then a line of three dashes — <code>---</code> — before the text you're searching for.</p>
 
     <div class="deflist">
       <div class="row">
-        <div class="k">Flowchart</div>
-        <div class="v"><b>Boxes and arrows.</b> Show steps and how they branch. You can lay it out left-to-right (<code>LR</code>) or top-down (<code>TD</code>).
-<pre><code>```mermaid
-flowchart TD
-  Start --> Decision{OK?}
-  Decision -->|yes| End
-  Decision -->|no| Start
-```</code></pre>
-        </div>
+        <div class="k">title</div>
+        <div class="v">A heading shown above the results.</div>
       </div>
       <div class="row">
-        <div class="k">Sequence diagram</div>
-        <div class="v"><b>Who talks to whom.</b> Show the participants and the messages passing between them, in order.
-<pre><code>```mermaid
-sequenceDiagram
-  Alice->>Bob: Question
-  Bob-->>Alice: Answer
-```</code></pre>
-        </div>
+        <div class="k">limit</div>
+        <div class="v">The most results to show.</div>
+      </div>
+      <div class="row">
+        <div class="k">snippet: false</div>
+        <div class="v">Hide the little preview under each result. Or use <code>compact: true</code> for a bare list of links.</div>
+      </div>
+      <div class="row">
+        <div class="k">kind</div>
+        <div class="v">For search by meaning: what to look through — <code>note</code>, <code>source</code>, <code>excerpt</code> (your saved quotations), or <code>all</code>. Notes alone is the default.</div>
       </div>
     </div>
 
     <div class="shot wide">
-      <div class="icon">🗺️</div>
-      <div class="k">A flowchart in a note</div>
-      <div class="d">A finished note showing a small decision-branch flowchart, drawn neatly in its own block with colors that match the rest of the note.</div>
+      <div class="icon">🔎</div>
+      <div class="k">A search cell in a note</div>
+      <div class="d">A note with a search cell titled "See also": below it, a short list of related notes, each showing its title as a link above a muted one-line snippet of the matching text.</div>
     </div>
 
     <div class="box">
-      <span class="label">Diagrams match your theme</span>
-      <p>Diagrams use the same colors as the note around them. Switch between light, dark, or high-contrast, and your diagrams redraw to match — there's nothing extra to set up.</p>
+      <span class="label">Meaning vs. keyword</span>
+      <p>Reach for <b>meaning</b> when you want notes on the same idea however they're worded, and <b>keyword</b> when you know the exact term you're hunting for. Search by meaning draws on the same understanding of your notes that powers <a href="right-sidebar-related.html">Related notes</a> in the sidebar; if that isn't ready yet, a meaning cell simply comes up empty.</p>
     </div>
 
     <div class="pager">
-      <a class="prev" href="notes-math.html">
+      <a class="prev" href="notes-query.html">
         <span class="dir">Previous</span>
-        <span class="ttl">← Math</span>
+        <span class="ttl">← Query cells</span>
       </a>
-      <a class="next" href="notes-charts.html">
+      <a class="next" href="notes-tables.html">
         <span class="dir">Next</span>
-        <span class="ttl">Charts →</span>
+        <span class="ttl">Tables &amp; CSV →</span>
       </a>
     </div>
   </main>
