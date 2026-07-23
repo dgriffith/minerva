@@ -95,22 +95,6 @@ test('right-sidebar-tables', async () => {
   await shootPanel('right-sidebar-tables', 'Tables', '.tables-panel', 900);
 });
 
-// HARD CASE — Inspections has no in-app path in v1.0: RightSidebar's Activity
-// group omits the sub-tab (kept commented out), and the status-bar inspection
-// badge only renders when `inspectionCount > 0`, which App never sets. This
-// best-effort recipe attempts the (absent) sub-tab and, failing that, crops the
-// whole right sidebar so the run still yields a file — but the image will NOT be
-// the Inspections panel. Runs last and never throws so it can't skip the serial
-// group. FLAGGED for human review: re-enable the tab (or wire a status-bar
-// affordance) to capture this panel for real.
-test('right-sidebar-inspections', async () => {
-  await openNote(h.win, NOTE);
-  await ensureRightSidebar();
-  try {
-    await h.win.locator('.sub-tab[title="Inspections"]').first().click({ timeout: 2000 });
-    await h.win.waitForTimeout(600);
-    await shoot(h.win, 'right-sidebar-inspections', h.win.locator('.inspections-panel').first());
-  } catch {
-    await shoot(h.win, 'right-sidebar-inspections', h.win.locator('aside.right-sidebar').first());
-  }
-});
+// Inspections page dropped: the panel has no in-app path in v1.0 (sub-tab kept
+// commented out, status-bar badge never triggered), so there is nothing real to
+// capture. Removed rather than shipping a wrong image.
