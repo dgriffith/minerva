@@ -160,11 +160,10 @@ SELECT ?title ?path WHERE {
 
     <p>A chart takes a couple more settings — <code>x</code> and <code>y</code> to pick which columns become the two axes, <code>type</code> for <code>line</code>, <code>bar</code>, or <code>area</code>, and <code>height</code> for how tall it is.</p>
 
-    <div class="shot wide">
-      <div class="icon">📊</div>
-      <div class="k">A query cell in a note</div>
-      <div class="d">A note with a query cell titled "Open questions": below it, a tidy list of note links that Minerva gathered from the knowledge base, each one clickable.</div>
-    </div>
+    <figure class="shot-img">
+      <img src="img/notes-query.png" alt="A note with a query cell titled &quot;Open questions&quot;: below it, a tidy list of note links that Minerva gathered from the knowledge base, each one clickable." loading="lazy" />
+      <figcaption>A query cell in a note</figcaption>
+    </figure>
 
     <h2 id="backlinks">A cell for backlinks</h2>
     <p>One query cell needs no question at all. Write <code>:::query-backlinks</code> (then a closing <code>:::</code>) and it lists every note that links to the one you're in — a ready-made "mentioned in" section you can drop anywhere. Add a <code>title</code> for a heading, a <code>limit</code> to cap the count, or <code>linkType</code> to show only certain kinds of links, such as citations.</p>
