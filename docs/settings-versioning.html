@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Minerva — Docs — Settings: Skills</title>
-<meta name="description" content="The Skills tab in Settings — add your own thinking tools and choose which AI model each one uses." />
+<title>Minerva — Docs — Versioning</title>
+<meta name="description" content="Settings for how long Minerva keeps each note's saved versions, how many it keeps per note, and how big a file can get before it stops being recorded." />
 <link rel="stylesheet" href="../minerva.css" />
 <link rel="stylesheet" href="docs.css" />
 </head>
@@ -67,7 +67,7 @@
     <a href="settings-appearance.html" class="sub">Appearance</a>
     <a href="settings-behaviors.html" class="sub">Behaviors</a>
     <a href="settings-notes.html" class="sub">Notes</a>
-    <a href="settings-versioning.html" class="sub">Versioning</a>
+    <a href="settings-versioning.html" class="sub active">Versioning</a>
     <a href="settings-formatter.html" class="sub">Formatter</a>
     <a href="settings-object-types.html" class="sub">Object Types</a>
     <a href="settings-inspections.html" class="sub">Inspections</a>
@@ -77,7 +77,7 @@
     <a href="settings-clipper.html" class="sub">Clipper</a>
     <a href="settings-compute.html" class="sub">Compute</a>
     <a href="settings-ai.html" class="sub">AI</a>
-    <a href="settings-skills.html" class="sub active">Skills</a>
+    <a href="settings-skills.html" class="sub">Skills</a>
 
     <h4>Data &amp; workflows</h4>
     <a href="refactoring.html">Refactoring</a>
@@ -91,38 +91,55 @@
 
   <!-- ===== Content ===== -->
   <main class="docs-content">
-    <p class="crumbs"><a href="index.html">Docs</a><span class="sep">/</span><a href="settings.html">Settings</a><span class="sep">/</span>Skills</p>
+    <p class="crumbs"><a href="index.html">Docs</a><span class="sep">/</span><a href="settings.html">Settings</a><span class="sep">/</span>Versioning</p>
 
-    <h1>Skills</h1>
-    <p class="lede">Skills are the ready-made thinking tools that appear in Minerva's Learning, Research, and Analysis menus. The <b>Skills</b> tab in Settings lets you add your own and choose which AI model each one uses. Turning skills on or off, moving them between menus, and reordering them are covered at <a href="thinking-tools-managing-authoring.html">Thinking tools → Managing &amp; authoring</a>.</p>
-
-    <h2 id="import">Adding your own skill</h2>
-    <p>Click <b>Add skill…</b> and pick your skill file. Minerva checks that it's a valid, complete skill and adds it to your collection. If something's wrong — a missing detail, or a name that clashes with one you already have — it tells you exactly what to fix right below the button, and nothing is added until the file checks out.</p>
-    <p>Once a skill is added, it appears right away in its menu, ready to use. Two more buttons sit alongside: <b>Open skills folder</b> opens the place your skills are kept, and <b>Reload</b> refreshes the list after you've edited or dropped in a skill by hand.</p>
+    <h1>Versioning</h1>
+    <p class="lede">Minerva keeps a copy of every version of every note you save, so you can read them and put one back from the <a href="right-sidebar-history.html">History panel</a>. That costs disk, and these three settings decide how much: how long a version lives, how many pile up for one note, and how big a file has to get before it stops being recorded.</p>
 
     <figure class="shot-img">
-      <img src="img/settings-skills.png" alt="The Skills tab: the Import skill / Reveal skills folder / Reload buttons across the top, a Skill models section with a provider picker and a Reset to Default button, and below them the list of skills, each with a switch to turn it on, a menu it belongs to, and a picker to choose its AI model." loading="lazy" />
-      <figcaption>Screenshot — the Skills settings panel</figcaption>
+      <img src="img/settings-versioning.png" alt="The Versioning panel in Settings, showing the three limits: keep versions for 30 days, 500 versions per note, and a 1024 KB maximum file size." loading="lazy" />
+      <figcaption>Screenshot — Settings → Versioning</figcaption>
     </figure>
 
-    <h2 id="model-overrides">Choosing a skill's AI model</h2>
-    <p>Each skill has a model picker. Leave it on the default and the skill uses the model it's meant to run on. Pick a specific model instead to pin that one skill to your choice — handy when you want a heavier model for careful analysis, or a faster one for quick tasks. The default option always names the model it would actually use, so there's no guesswork. Your choices apply everywhere you use Minerva on this computer.</p>
+    <h2 id="limits">The three limits</h2>
+    <div class="deflist">
+      <div class="row">
+        <div class="k">Keep versions for</div>
+        <div class="v">How many days an unnamed version lives before it's dropped. Default: <b>30</b>. Raise it if you want a longer memory; lower it if history is using more disk than it's worth to you.</div>
+      </div>
+      <div class="row">
+        <div class="k">Versions per note</div>
+        <div class="v">How many unnamed versions to keep for a single note, newest first. Default: <b>500</b>. This is the backstop for a long editing session, which can otherwise produce hundreds of versions of one note in an afternoon.</div>
+      </div>
+      <div class="row">
+        <div class="k">Maximum file size</div>
+        <div class="v">Files bigger than this get no history at all. Default: <b>1024 KB</b> — far above any note you'd write by hand, and low enough that a large generated <code>.csv</code> isn't copied on every save. Set it to <code>0</code> if you'd rather have history on everything and have the disk for it.</div>
+      </div>
+    </div>
 
-    <h2 id="reset-models">Resetting every skill to its default</h2>
-    <p>Each skill's author picked a model for it — the heavier thinking skills get a frontier model, the lighter ones a cheaper sibling — and those choices are written in Anthropic's models. If you work through OpenAI or Google, that's the wrong vocabulary, and re-picking a model on fifty-odd rows by hand is nobody's idea of an evening.</p>
-    <p>Choose a provider next to <b>Reset to Default…</b> and every skill goes back to its author's choice, expressed in that provider's models: the heavy skills land on the frontier model, the light ones on the cheap one. Resetting onto the provider the skills were written for simply clears your pins, so every row reads "Default" again.</p>
-    <p>Only the model pins change. Which skills are switched on, which menu each one sits in, and their order are left exactly as you have them.</p>
+    <div class="box">
+      <span class="label">Two versions are never dropped</span>
+      <p>Neither limit touches a version you've <a href="right-sidebar-history.html#naming">named</a>, or a note's <b>initial version</b>. A name is a deliberate "keep this", and the initial version is what "undo everything" gets you back to — losing either to a retention rule would defeat the point of keeping history at all. Neither is what fills a disk.</p>
+    </div>
 
-    <p>To turn a skill on or off, move it to a different menu, or change its order, see <a href="thinking-tools-managing-authoring.html">Thinking tools → Managing &amp; authoring</a>.</p>
+    <h2 id="lowering">What happens when you lower a limit</h2>
+    <p>The open thoughtbase is re-pruned as soon as you change a setting, so tightening a limit frees the disk immediately rather than gradually as you happen to edit each note. Other thoughtbases on this machine catch up the next time each of their notes is saved.</p>
+    <p>Pruning removes stored versions permanently. If there's a state of a note you want to survive a shorter retention window, name it first.</p>
+
+    <h2 id="per-machine">Per-machine, not per-thoughtbase</h2>
+    <p>These limits are stored for this computer and apply to every thoughtbase you open on it — what they're budgeting is this machine's disk, and the same thoughtbase on a roomier machine can reasonably keep more. The history itself is per-thoughtbase: it lives in the <code>.minerva</code> folder beside the notes, so a thoughtbase carries its own past with it if you move it.</p>
+
+    <h2 id="what-is-recorded">What gets recorded</h2>
+    <p>Every save of every note — markdown and the <code>.csv</code>, <code>.ttl</code> and <code>.py</code> notes alike — whether the save came from you, from a <a href="thinking-tools.html">thinking tool</a>, or from restoring an earlier version. Attachments and images aren't notes and aren't recorded. Neither is anything inside <code>.minerva</code> itself.</p>
 
     <div class="pager">
-      <a class="prev" href="settings-ai.html">
+      <a class="prev" href="settings-notes.html">
         <span class="dir">Previous</span>
-        <span class="ttl">← AI</span>
+        <span class="ttl">← Notes</span>
       </a>
-      <a class="next" href="refactoring.html">
+      <a class="next" href="settings-formatter.html">
         <span class="dir">Next</span>
-        <span class="ttl">Refactoring →</span>
+        <span class="ttl">Formatter →</span>
       </a>
     </div>
   </main>
